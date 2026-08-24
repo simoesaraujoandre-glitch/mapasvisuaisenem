@@ -53,24 +53,6 @@
   -webkit-box-decoration-break: clone;
 }
 
-/* Subtle grid/dot study background pattern */
-.bg-grid-pattern {
-  background-size: 24px 24px;
-  background-image: 
-    linear-gradient(to right, rgba(14, 42, 98, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(14, 42, 98, 0.035) 1px, transparent 1px);
-}
-
-.bg-dot-pattern {
-  background-size: 20px 20px;
-  background-image: radial-gradient(rgba(14, 42, 98, 0.06) 1.2px, transparent 1.2px);
-}
-
-.bg-navy-dot-pattern {
-  background-size: 22px 22px;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
-}
-
 @keyframes scroll-right {
   0% {
     transform: translate3d(-50%, 0, 0);

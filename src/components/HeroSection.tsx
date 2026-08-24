@@ -1,8 +1,7 @@
 import React from 'react';
-import { Check, ArrowRight, Sparkles, Smartphone, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { MarcaTexto } from './MarcaTexto';
 import { ImagePlaceholder } from './ImagePlaceholder';
-import { CurvedArrow, MathStickers, StarDoodle } from './Doodles';
 import { LANDING_CONFIG } from '../config';
 
 export const HeroSection: React.FC = () => {
@@ -17,7 +16,7 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24 overflow-hidden bg-[#FBFAF6]"
+      className="relative pt-28 pb-16 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24 overflow-hidden bg-[#FBFAF6]"
     >
       {/* Subtle math doodles scattered in background */}
       <div className="absolute top-20 left-8 hidden lg:block opacity-35 pointer-events-none">
@@ -27,7 +26,7 @@ export const HeroSection: React.FC = () => {
         <span className="font-hand text-lg text-[#0E2A62]">π ≅ 3,14</span>
       </div>
 
-      <div className="max-w-[1220px] mx-auto px-4 sm:px-6 md:px-8">
+      <div className="max-w-[1140px] mx-auto px-4 sm:px-6 md:px-8">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto z-10">
           
           {/* Main Headline & Promise */}

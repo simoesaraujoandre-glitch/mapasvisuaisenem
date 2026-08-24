@@ -1,5 +1,4 @@
 import React from 'react';
-import { MarcaTexto } from './MarcaTexto';
 
 const PASSOS = [
   {

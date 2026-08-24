@@ -1,6 +1,5 @@
 import React from 'react';
 import { X, Check, ArrowRight } from 'lucide-react';
-import { MarcaTexto } from './MarcaTexto';
 import { ImagePlaceholder } from './ImagePlaceholder';
 import { LANDING_CONFIG } from '../config';
 

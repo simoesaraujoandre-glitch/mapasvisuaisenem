@@ -1,5 +1,4 @@
 import React from 'react';
-import { MarcaTexto } from './MarcaTexto';
 
 const MATEMATICA_ITEMS = [
   'Razão, proporção e regra de três',

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { LANDING_CONFIG } from '../config';
 
 export const StickyMobileCta: React.FC = () => {
