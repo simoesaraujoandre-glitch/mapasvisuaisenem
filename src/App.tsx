@@ -4,8 +4,6 @@
  */
 
 import React from 'react';
-import { Header } from './components/Header';
-import { StickyMobileCta } from './components/StickyMobileCta';
 import { HeroSection } from './components/HeroSection';
 import { CarouselSection } from './components/CarouselSection';
 import { OQueRecebeSection } from './components/OQueRecebeSection';
@@ -21,9 +19,6 @@ import { Footer } from './components/Footer';
 export default function App() {
   return (
     <div className="min-h-screen bg-white text-[#0E2A62] flex flex-col selection:bg-[#F6C945] selection:text-[#0E2A62]">
-      {/* Fixed Header */}
-      <Header />
-
       {/* Main Content Sections */}
       <main className="flex-1">
         {/* 1. HERO */}
@@ -59,9 +54,6 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
-
-      {/* Sticky Mobile CTA */}
-      <StickyMobileCta />
     </div>
   );
 }

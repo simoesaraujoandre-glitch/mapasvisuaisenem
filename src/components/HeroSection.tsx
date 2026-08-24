@@ -16,7 +16,7 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative pt-28 pb-16 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24 overflow-hidden bg-[#FBFAF6]"
+      className="relative pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24 overflow-hidden bg-[#FBFAF6]"
     >
       {/* Subtle math doodles scattered in background */}
       <div className="absolute top-20 left-8 hidden lg:block opacity-35 pointer-events-none">
