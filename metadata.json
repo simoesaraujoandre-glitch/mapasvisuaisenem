@@ -1,0 +1,6 @@
+{
+  "name": "Mapas Visuais ENEM",
+  "description": "Landing page oficial dos Mapas Visuais ENEM - Matemática, Linguagens e Redação para estudar com foco em buscar os 900+.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
