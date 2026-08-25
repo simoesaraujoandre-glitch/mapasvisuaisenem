@@ -14,10 +14,12 @@ export const LANDING_CONFIG = {
   // Preços
   PRECO_ANTERIOR: "R$ 184,90",
   PRECO_ATUAL: "R$ 27,90",
+  DESCONTO_COMPLETO: "85% OFF",
   PARCELAMENTO: "Pagamento único",
 
   PRECO_BASICO_ANTERIOR: "R$ 59,90",
   PRECO_BASICO_ATUAL: "R$ 10,00",
+  DESCONTO_BASICO: "83% OFF",
 
   // Mapeamento de imagens e mockups do produto
   IMAGES: {

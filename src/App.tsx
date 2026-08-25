@@ -6,6 +6,7 @@
 import React from 'react';
 import { UrgencyBanner } from './components/UrgencyBanner';
 import { HeroSection } from './components/HeroSection';
+import { CommunityStripSection } from './components/CommunityStripSection';
 import { CarouselSection } from './components/CarouselSection';
 import { OQueRecebeSection } from './components/OQueRecebeSection';
 import { AntesDepoisSection } from './components/AntesDepoisSection';
@@ -27,6 +28,9 @@ export default function App() {
       <main className="flex-1">
         {/* 1. HERO */}
         <HeroSection />
+
+        {/* 1.5 FAIXA DE COMUNIDADE (avatares + prova social com número real) */}
+        <CommunityStripSection />
 
         {/* 2. CARROSSEL */}
         <CarouselSection />

@@ -67,7 +67,7 @@ export const HeroSection: React.FC = () => {
             id="hero-subheadline"
             className="text-base sm:text-lg md:text-xl text-[#0E2A62]/85 leading-relaxed font-medium mb-6 sm:mb-7 max-w-[700px]"
           >
-            160 conteúdos explicados de forma direta e visual para você entender, memorizar e aplicar com mais facilidade.
+            Chega de virar página atrás de página em apostilas cansativas sem chegar ao que interessa. Aqui, cada um dos 160 conteúdos vem em um mapa visual direto ao ponto — fácil de entender, lembrar e aplicar na hora da prova.
           </p>
 
           {/* 3 Transformational Benefits */}

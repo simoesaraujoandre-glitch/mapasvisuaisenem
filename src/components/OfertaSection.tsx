@@ -95,8 +95,13 @@ export const OfertaSection: React.FC = () => {
 
             {/* Price Block */}
             <div className="text-center mb-5">
-              <div className="text-xs sm:text-sm font-semibold text-gray-400 line-through mb-0.5">
-                De: {LANDING_CONFIG.PRECO_ANTERIOR}
+              <div className="flex items-center justify-center gap-2 mb-0.5">
+                <span className="text-xs sm:text-sm font-semibold text-gray-400 line-through">
+                  De: {LANDING_CONFIG.PRECO_ANTERIOR}
+                </span>
+                <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-[#3FA654] text-white text-[10px] sm:text-xs font-black tracking-wide">
+                  {LANDING_CONFIG.DESCONTO_COMPLETO}
+                </span>
               </div>
               <p className="text-[11px] sm:text-xs font-extrabold text-[#0E2A62]/75 uppercase tracking-wider mb-0.5">
                 HOJE POR APENAS:
@@ -196,8 +201,13 @@ export const OfertaSection: React.FC = () => {
 
             {/* Price Block */}
             <div className="text-center mb-4">
-              <div className="text-xs sm:text-sm font-semibold text-gray-400 line-through mb-0.5">
-                De: {LANDING_CONFIG.PRECO_BASICO_ANTERIOR}
+              <div className="flex items-center justify-center gap-2 mb-0.5">
+                <span className="text-xs sm:text-sm font-semibold text-gray-400 line-through">
+                  De: {LANDING_CONFIG.PRECO_BASICO_ANTERIOR}
+                </span>
+                <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-[#3FA654] text-white text-[10px] sm:text-xs font-black tracking-wide">
+                  {LANDING_CONFIG.DESCONTO_BASICO}
+                </span>
               </div>
               <p className="text-[11px] sm:text-xs font-extrabold text-[#0E2A62]/75 uppercase tracking-wider mb-0.5">
                 HOJE POR APENAS:
