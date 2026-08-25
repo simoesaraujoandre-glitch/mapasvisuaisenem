@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import { UrgencyBanner } from './components/UrgencyBanner';
 import { HeroSection } from './components/HeroSection';
 import { CarouselSection } from './components/CarouselSection';
 import { OQueRecebeSection } from './components/OQueRecebeSection';
@@ -19,6 +20,9 @@ import { Footer } from './components/Footer';
 export default function App() {
   return (
     <div className="min-h-screen bg-white text-[#0E2A62] flex flex-col selection:bg-[#F6C945] selection:text-[#0E2A62]">
+      {/* Faixa de urgência - data atualizada automaticamente */}
+      <UrgencyBanner />
+
       {/* Main Content Sections */}
       <main className="flex-1">
         {/* 1. HERO */}
