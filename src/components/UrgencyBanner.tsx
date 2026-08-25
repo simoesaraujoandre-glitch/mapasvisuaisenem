@@ -26,7 +26,7 @@ export const UrgencyBanner: React.FC = () => {
   return (
     <div
       role="banner"
-      className="sticky top-0 z-50 w-full bg-[#D32F2F] text-white text-center py-2 px-3 text-xs sm:text-sm font-bold tracking-tight shadow-md"
+      className="w-full bg-[#D32F2F] text-white text-center py-2 px-3 text-xs sm:text-sm font-bold tracking-tight shadow-md"
     >
       ⏰ Oferta válida somente hoje, dia {dataHoje}!
     </div>
