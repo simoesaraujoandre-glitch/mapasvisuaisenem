@@ -1,67 +1,97 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import React from 'react';
-import { UrgencyBanner } from './components/UrgencyBanner';
-import { HeroSection } from './components/HeroSection';
-import { CommunityStripSection } from './components/CommunityStripSection';
-import { CarouselSection } from './components/CarouselSection';
-import { OQueRecebeSection } from './components/OQueRecebeSection';
-import { AntesDepoisSection } from './components/AntesDepoisSection';
-import { TransformacaoSection } from './components/TransformacaoSection';
+import React, { useState } from 'react';
+import { Hero } from './components/Hero';
+import { PainPoints } from './components/PainPoints';
+import { Curriculum } from './components/Curriculum';
+import { MethodComparison } from './components/MethodComparison';
 import { BonusSection } from './components/BonusSection';
-import { OfertaSection } from './components/OfertaSection';
-import { GarantiaSection } from './components/GarantiaSection';
+import { OfferSection } from './components/OfferSection';
+import { Testimonials } from './components/Testimonials';
+import { FinalCta } from './components/FinalCta';
 import { FaqSection } from './components/FaqSection';
-import { CtaFinalSection } from './components/CtaFinalSection';
 import { Footer } from './components/Footer';
+import { VisualSampleModal } from './components/VisualSampleModal';
+import { CheckoutModal } from './components/CheckoutModal';
+import { VisualSheetSample } from './types';
 
 export default function App() {
+  const [selectedPlanForCheckout, setSelectedPlanForCheckout] = useState<'basic' | 'complete' | null>(null);
+  const [activeSampleModal, setActiveSampleModal] = useState<VisualSheetSample | null>(null);
+
+  const handleOpenCheckout = (plan: 'basic' | 'complete' = 'basic') => {
+    const offerElement = document.getElementById('oferta');
+    if (offerElement) {
+      offerElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      setSelectedPlanForCheckout(plan);
+    }
+  };
+
+  const handleCloseCheckout = () => {
+    setSelectedPlanForCheckout(null);
+  };
+
+  const handleOpenSample = (sample: VisualSheetSample) => {
+    setActiveSampleModal(sample);
+  };
+
+  const handleCloseSample = () => {
+    setActiveSampleModal(null);
+  };
+
   return (
-    <div className="min-h-screen bg-white text-[#0E2A62] flex flex-col selection:bg-[#F6C945] selection:text-[#0E2A62]">
-      {/* Faixa de urgência - data atualizada automaticamente */}
-      <UrgencyBanner />
-
-      {/* Main Content Sections */}
-      <main className="flex-1">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-700 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
+      <main className="flex-grow">
         {/* 1. HERO */}
-        <HeroSection />
+        <Hero 
+          onCtaClick={() => handleOpenCheckout('basic')} 
+          onOpenSample={handleOpenSample} 
+        />
 
-        {/* 1.5 FAIXA DE COMUNIDADE (avatares + prova social com número real) */}
-        <CommunityStripSection />
+        {/* 2. POR QUE A MAIORIA TRAVA NA MATEMÁTICA DO ENEM? */}
+        <PainPoints />
 
-        {/* 2. CARROSSEL */}
-        <CarouselSection />
+        {/* 3. O QUE VOCÊ VAI DOMINAR NA PRÁTICA */}
+        <Curriculum 
+          onOpenSample={handleOpenSample}
+          onCtaClick={() => handleOpenCheckout('basic')}
+        />
 
-        {/* 3. O QUE VOCÊ VAI APRENDER */}
-        <OQueRecebeSection />
+        {/* 4. MÉTODO TRADICIONAL × MÉTODO VISUAL */}
+        <MethodComparison />
 
-        {/* 4. ANTES × DEPOIS */}
-        <AntesDepoisSection />
-
-        {/* 5. TRANSFORMAÇÃO */}
-        <TransformacaoSection />
-
-        {/* 6. BÔNUS */}
+        {/* 5. BÔNUS */}
         <BonusSection />
 
-        {/* 7. PLANOS */}
-        <OfertaSection />
+        {/* 6. OFERTA */}
+        <OfferSection onSelectPlan={(plan) => handleOpenCheckout(plan)} />
 
-        {/* 8. GARANTIA */}
-        <GarantiaSection />
+        {/* 7. DEPOIMENTOS */}
+        <Testimonials />
 
-        {/* 9. FAQ */}
+        {/* 8. CTA FINAL */}
+        <FinalCta onCtaClick={() => handleOpenCheckout('basic')} />
+
+        {/* FAQ Section */}
         <FaqSection />
-
-        {/* 10. CTA FINAL */}
-        <CtaFinalSection />
       </main>
 
       {/* Footer */}
       <Footer />
+
+      {/* Interactive Visual Map Zoom Modal */}
+      <VisualSampleModal 
+        sample={activeSampleModal} 
+        onClose={handleCloseSample}
+        onSelectPlan={(plan) => handleOpenCheckout(plan)}
+      />
+
+      {/* Interactive Checkout Modal (Pix & Card) */}
+      {selectedPlanForCheckout && (
+        <CheckoutModal 
+          initialPlan={selectedPlanForCheckout} 
+          onClose={handleCloseCheckout} 
+        />
+      )}
     </div>
   );
 }

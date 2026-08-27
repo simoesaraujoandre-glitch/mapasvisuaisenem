@@ -1,87 +1,48 @@
-import React, { useState } from 'react';
-import { BookOpen } from 'lucide-react';
+import React from 'react';
+import { ShieldCheck, Lock, Sparkles } from 'lucide-react';
 
 export const Footer: React.FC = () => {
-  const [modalContent, setModalContent] = useState<string | null>(null);
-
-  const openModal = (e: React.MouseEvent, title: string) => {
-    e.preventDefault();
-    setModalContent(title);
-  };
-
   return (
-    <footer id="site-footer" className="bg-white text-[#0E2A62] py-8 md:py-10 border-t border-[#0E2A62]/10">
-      <div className="max-w-[1140px] mx-auto px-4 sm:px-6 md:px-8">
-        
-        {/* Top Footer Row */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-6 border-b border-[#0E2A62]/10">
+    <footer className="bg-[#F8FAFC] border-t border-slate-200 py-12 text-slate-500 text-xs sm:text-sm">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-100">
           {/* Brand */}
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-[#F6C945] text-[#0E2A62] flex items-center justify-center font-bold">
-              <BookOpen className="w-4 h-4" />
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xs">
+              <Sparkles className="w-4 h-4" />
             </div>
-            <span className="font-display font-black text-base sm:text-lg text-[#0E2A62]">
-              Mapas Visuais <span className="text-[#0E2A62]">ENEM</span>
+            <span className="font-heading font-bold text-slate-900 text-base">
+              Matemática <span className="text-blue-600">Visual</span> ENEM
             </span>
           </div>
 
-          {/* Links */}
-          <div className="flex items-center flex-wrap justify-center gap-5 text-xs sm:text-sm font-semibold text-[#0E2A62]/70">
-            <a
-              href="#termos"
-              onClick={(e) => openModal(e, 'Termos de Uso')}
-              className="hover:text-[#0E2A62] transition-colors"
-            >
-              Termos de Uso
-            </a>
-            <a
-              href="#privacidade"
-              onClick={(e) => openModal(e, 'Política de Privacidade')}
-              className="hover:text-[#0E2A62] transition-colors"
-            >
-              Política de Privacidade
-            </a>
-            <a
-              href="#contato"
-              onClick={(e) => openModal(e, 'Contato')}
-              className="hover:text-[#0E2A62] transition-colors"
-            >
-              Contato
-            </a>
+          {/* Trust badges */}
+          <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-slate-500 font-medium">
+            <div className="flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <span>Garantia de 7 Dias</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Lock className="w-4 h-4 text-blue-600" />
+              <span>Ambiente Criptografado SSL</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span>Acesso Imediato</span>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Legal Disclaimer */}
-        <div className="pt-6 text-center max-w-2xl mx-auto text-xs text-[#0E2A62]/55 leading-relaxed font-normal">
-          <p className="mb-1.5">
-            Este material é independente e não possui vínculo oficial com o INEP ou com o Ministério da Educação. ENEM é um exame oficial do Governo Federal.
+        {/* Legal Disclaimer */}
+        <div className="pt-6 text-center text-[11px] text-slate-400 space-y-2">
+          <p>
+            © {new Date().getFullYear()} Matemática Visual ENEM. Todos os direitos reservados.
           </p>
-          <p>© {new Date().getFullYear()} Mapas Visuais ENEM. Todos os direitos reservados.</p>
+          <p className="max-w-2xl mx-auto text-slate-400">
+            Este produto não garante a obtenção de resultados específicos no ENEM. As notas dependem da dedicação, prática e estudo individual de cada estudante. Todas as marcas registradas são de propriedade de seus respectivos titulares.
+          </p>
         </div>
-
       </div>
-
-      {/* Simple Information Modal */}
-      {modalContent && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4"
-        >
-          <div className="bg-white text-[#0E2A62] max-w-md w-full rounded-2xl p-6 shadow-2xl animate-in zoom-in-95 duration-150">
-            <h3 className="font-display font-black text-xl mb-3 text-[#0E2A62]">{modalContent}</h3>
-            <p className="text-sm text-[#0E2A62]/80 leading-relaxed mb-6 font-medium">
-              As informações completas de {modalContent.toLowerCase()} e dados do produtor responsável serão fornecidas na plataforma oficial de compra e entrega do material.
-            </p>
-            <button
-              onClick={() => setModalContent(null)}
-              className="w-full bg-[#F6C945] text-[#0E2A62] font-black py-3 rounded-xl hover:bg-[#ebce38] transition-colors"
-            >
-              Fechar
-            </button>
-          </div>
-        </div>
-      )}
     </footer>
   );
 };

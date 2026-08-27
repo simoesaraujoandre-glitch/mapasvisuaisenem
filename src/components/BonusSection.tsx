@@ -1,106 +1,112 @@
 import React from 'react';
-import { Gift } from 'lucide-react';
-import { LANDING_CONFIG } from '../config';
-
-const BONUSES = [
-  {
-    id: 'bonus-01',
-    tag: 'BÔNUS 01',
-    title: 'Mapas Visuais de Redação',
-    description:
-      'Entenda visualmente o que uma boa Redação precisa ter e organize suas ideias com mais clareza antes de escrever.',
-    originalPrice: 'De R$50,00',
-    image: LANDING_CONFIG.IMAGES.REDACAO_MOCKUP,
-    alt: 'Bônus 1 - Mapas Visuais de Redação',
-  },
-  {
-    id: 'bonus-02',
-    tag: 'BÔNUS 02',
-    title: '50 Exercícios de Fixação',
-    description:
-      'Teste o que aprendeu e descubra quais conteúdos ainda precisa reforçar. 25 exercícios de Matemática + 25 de Linguagens.',
-    originalPrice: 'De R$40,00',
-    image: LANDING_CONFIG.IMAGES.BONUS_EXERCICIOS_MOCKUP,
-    alt: 'Bônus 2 - 50 Exercícios de Fixação',
-  },
-  {
-    id: 'bonus-03',
-    tag: 'BÔNUS 03',
-    title: 'Plano de Revisão ENEM',
-    description:
-      'Pare de decidir todos os dias o que estudar e siga um caminho pronto de 7, 15 ou 30 dias.',
-    originalPrice: 'De R$35,00',
-    image: LANDING_CONFIG.IMAGES.PLANO_REVISAO_MOCKUP,
-    alt: 'Bônus 3 - Plano de Revisão ENEM',
-  },
-];
+import { Gift, BookOpen, PenTool, CheckSquare, Calendar, Sparkles } from 'lucide-react';
+import { bonusList } from '../data/contentData';
 
 export const BonusSection: React.FC = () => {
+  const getBonusIcon = (id: string) => {
+    switch (id) {
+      case 'bonus-1': return <BookOpen className="w-5 h-5" />;
+      case 'bonus-2': return <PenTool className="w-5 h-5" />;
+      case 'bonus-3': return <CheckSquare className="w-5 h-5" />;
+      case 'bonus-4': return <Calendar className="w-5 h-5" />;
+      default: return <Gift className="w-5 h-5" />;
+    }
+  };
+
   return (
-    <section
-      id="bonus"
-      className="py-16 md:py-20 lg:py-24 bg-[#F4F8FF] relative overflow-hidden"
-    >
-      <div className="max-w-[1140px] mx-auto px-4 sm:px-6 md:px-8">
+    <section id="bonus" className="bg-[#F7FAFF] py-16 md:py-24 border-b border-slate-200/70">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 md:mb-12">
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white text-[#0E2A62] font-black text-xs tracking-wider uppercase mb-3 sm:mb-3.5 border border-[#0E2A62]/10 shadow-2xs">
-            <Gift className="w-3.5 h-3.5 text-[#0E2A62]" />
-            <span>3 BÔNUS EXCLUSIVOS</span>
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 px-3.5 py-1.5 rounded-full text-xs font-bold text-blue-700 uppercase tracking-wider mb-4">
+            <Gift className="w-3.5 h-3.5" />
+            <span>Presentes Exclusivos</span>
           </div>
 
-          <h2 className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-[#0E2A62] tracking-tight leading-tight">
-            E para complementar seus estudos, nós preparamos 3 bônus exclusivos para você melhorar ainda mais a sua nota no ENEM
+          <h2 className="font-heading font-extrabold text-slate-900 text-2xl sm:text-3xl md:text-4xl leading-tight mb-4">
+            Quer uma preparação ainda mais completa para o ENEM?
           </h2>
+
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-sans max-w-2xl mx-auto">
+            Além do material de Matemática, no <strong className="text-blue-600 font-semibold">Plano Completo</strong> você recebe 4 bônus especiais.
+          </p>
         </div>
 
-        {/* 3 Distinct Bonus Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 items-stretch">
-          {BONUSES.map((bonus) => (
-            <div
+        {/* 4 Bonus Cards (2 per row on desktop, 1 per row on mobile) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {bonusList.map((bonus) => (
+            <div 
               key={bonus.id}
-              id={bonus.id}
-              className="bg-white rounded-[22px] border-2 border-[#0E2A62]/12 p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 hover:border-blue-300 hover:shadow-md transition-all duration-200 flex flex-col justify-between group"
             >
-              {/* Header / Text Information */}
-              <div className="flex flex-col items-center text-center">
-                {/* 1. Tag Bônus */}
-                <div className="mb-2.5">
-                  <span className="inline-block px-3 py-0.5 rounded-full bg-[#FFF8D9] text-[#0E2A62] border border-[#F6C945] font-black text-xs tracking-wider uppercase">
-                    {bonus.tag}
-                  </span>
+              <div>
+                {/* Bonus Cover / Mockup Header */}
+                <div className="flex items-start justify-between gap-4 sm:gap-5 mb-6">
+                  {/* Visual mini-cover with uploaded image */}
+                  <div className="relative flex-shrink-0 w-24 h-32 sm:w-28 sm:h-36 bg-gradient-to-b from-slate-50 to-blue-50/40 rounded-xl p-1.5 shadow-sm border border-slate-200/80 flex items-center justify-center overflow-hidden group-hover:scale-105 group-hover:shadow-md transition-all duration-200">
+                    {bonus.imageUrl ? (
+                      <img 
+                        src={bonus.imageUrl} 
+                        alt={bonus.title}
+                        width={320}
+                        height={320}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-contain drop-shadow-md"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-blue-600 to-slate-900 rounded-lg p-2 flex flex-col justify-between text-white">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[8px] font-bold uppercase tracking-wider bg-white/20 px-1 py-0.5 rounded">
+                            ENEM
+                          </span>
+                          {getBonusIcon(bonus.id)}
+                        </div>
+                        <div className="text-[9px] font-heading font-bold leading-tight line-clamp-2">
+                          {bonus.title}
+                        </div>
+                        <div className="text-[7px] text-blue-200 font-mono">
+                          PDF HD • Digital
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Title & Tag */}
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">
+                        {bonus.number}
+                      </span>
+                    </div>
+
+                    <h3 className="font-heading font-bold text-slate-900 text-lg sm:text-xl group-hover:text-blue-600 transition-colors">
+                      {bonus.title}
+                    </h3>
+
+                    <div className="text-xs text-slate-400 font-medium mt-1">
+                      Valor avulso: <span className="line-through">{bonus.originalPrice}</span> (Grátis hoje)
+                    </div>
+                  </div>
                 </div>
 
-                {/* 2. Título */}
-                <h3 className="font-display font-black text-lg sm:text-xl text-[#0E2A62] tracking-tight mb-1.5 min-h-[28px] sm:min-h-[48px] flex items-center justify-center">
-                  {bonus.title}
-                </h3>
-
-                {/* 3. Frase Curta */}
-                <p className="text-xs sm:text-sm text-[#0E2A62]/80 leading-relaxed font-medium min-h-[40px] sm:min-h-[52px] flex items-start justify-center">
+                {/* Description */}
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6 font-sans">
                   {bonus.description}
                 </p>
-
-                {/* Preço Original -> GRÁTIS */}
-                <div className="mt-2.5 inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#3FA654]/10 border border-[#3FA654]/20 text-xs font-bold">
-                  <span className="text-gray-400 line-through">{bonus.originalPrice}</span>
-                  <span className="text-[#3FA654] font-black uppercase">GRÁTIS</span>
-                </div>
               </div>
 
-              {/* 4. Mockup Container */}
-              <div className="w-full mt-4 flex items-center justify-center bg-white rounded-xl p-2.5 border border-[#0E2A62]/8">
-                <img
-                  src={bonus.image}
-                  alt={bonus.alt}
-                  width={240}
-                  height={190}
-                  className="w-full max-w-[220px] h-[160px] sm:h-[180px] object-contain drop-shadow-sm group-hover:scale-102 transition-transform duration-300"
-                  loading="lazy"
-                  decoding="async"
-                />
+              {/* Highlights pills */}
+              <div className="pt-4 border-t border-slate-100 flex flex-wrap gap-2">
+                {bonus.bullets.map((bullet, bIdx) => (
+                  <span 
+                    key={bIdx}
+                    className="text-xs font-medium text-slate-600 bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-lg"
+                  >
+                    • {bullet}
+                  </span>
+                ))}
               </div>
             </div>
           ))}

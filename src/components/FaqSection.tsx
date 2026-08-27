@@ -1,114 +1,54 @@
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle } from 'lucide-react';
-
-interface FaqItem {
-  question: string;
-  answer: string;
-}
-
-const FAQ_ITEMS: FaqItem[] = [
-  {
-    question: 'Como recebo os Mapas Visuais?',
-    answer:
-      'O acesso ao material digital é liberado imediatamente após a confirmação da compra e enviado diretamente para o seu e-mail.',
-  },
-  {
-    question: 'Posso acessar pelo celular?',
-    answer:
-      'Sim. O material foi desenvolvido para visualização nítida tanto no celular quanto no tablet ou computador.',
-  },
-  {
-    question: 'É uma apostila tradicional?',
-    answer:
-      'Não. O conteúdo foi estruturado em Mapas Visuais direto ao ponto, com um assunto por página, esquemas visuais, exemplos e destaques para você não perder tempo com textos densos.',
-  },
-  {
-    question: 'Quais matérias estão incluídas no material principal?',
-    answer:
-      'O material principal contém 80 Mapas Visuais de Matemática e 80 Mapas Visuais de Linguagens, totalizando 160 mapas.',
-  },
-  {
-    question: 'O material de Redação está incluso?',
-    answer:
-      'Sim, no Plano Completo os Mapas Visuais de Redação estão incluídos como bônus gratuito, além dos 50 Exercícios de Fixação e do Plano de Revisão ENEM.',
-  },
-  {
-    question: 'Preciso já dominar os conteúdos para aproveitar os mapas?',
-    answer:
-      'Não. Os mapas foram pensados para ajudar você a entender o conteúdo desde os fundamentos até os assuntos mais exigidos pelo ENEM.',
-  },
-  {
-    question: 'Os Mapas Visuais garantem que eu vou tirar 900+ no ENEM?',
-    answer:
-      'Nenhum material pode garantir uma nota, porque o resultado depende do seu estudo, prática e desempenho no dia da prova. Os Mapas Visuais foram criados para ajudar você a entender, memorizar e revisar com mais facilidade, colocando você em condições muito melhores para buscar uma nota alta.',
-  },
-  {
-    question: 'Como funciona a garantia de 7 dias?',
-    answer:
-      'Você tem 7 dias para testar todo o material. Se achar que essa forma visual de estudar não ajudou na sua preparação, basta solicitar o reembolso dentro desse prazo.',
-  },
-];
+import { HelpCircle, ChevronDown } from 'lucide-react';
+import { faqs } from '../data/contentData';
 
 export const FaqSection: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0); // First item open by default
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const toggleItem = (index: number) => {
-    setOpenIndex((prev) => (prev === index ? null : index));
+  const toggleFaq = (idx: number) => {
+    setOpenIndex(openIndex === idx ? null : idx);
   };
 
   return (
-    <section
-      id="faq"
-      className="py-16 md:py-20 lg:py-24 bg-white relative overflow-hidden"
-    >
-      <div className="max-w-[840px] mx-auto px-4 sm:px-6 md:px-8">
+    <section id="faq" className="bg-[#F1F5F9]/50 py-16 md:py-20 border-b border-slate-200/70">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-10 md:mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAF4FF] text-[#0E2A62] font-black text-xs tracking-wider uppercase mb-3 sm:mb-3.5 border border-[#0E2A62]/10">
-            <HelpCircle className="w-3.5 h-3.5 text-[#0E2A62]" />
-            <span>PERGUNTAS FREQUENTES</span>
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 px-3.5 py-1.5 rounded-full text-xs font-bold text-blue-700 uppercase tracking-wider mb-4">
+            <HelpCircle className="w-3.5 h-3.5" />
+            <span>Dúvidas Frequentes</span>
           </div>
 
-          <h2 className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-[#0E2A62] tracking-tight">
-            Ficou com alguma dúvida?
+          <h2 className="font-heading font-extrabold text-slate-900 text-2xl sm:text-3xl leading-tight mb-3">
+            Perguntas Frequentes
           </h2>
-          <p className="text-xs sm:text-sm md:text-base text-[#0E2A62]/70 mt-2 sm:mt-2.5 font-medium">
-            Veja as respostas para as perguntas mais comuns sobre o material
+
+          <p className="text-slate-600 text-sm sm:text-base font-sans">
+            Tudo o que você precisa saber antes de destravar seus estudos.
           </p>
         </div>
 
-        {/* Accordion List */}
-        <div className="space-y-2.5">
-          {FAQ_ITEMS.map((item, index) => {
-            const isOpen = openIndex === index;
+        {/* Accordion list */}
+        <div className="space-y-3.5">
+          {faqs.map((item, idx) => {
+            const isOpen = openIndex === idx;
             return (
-              <div
-                key={index}
-                className={`rounded-[14px] bg-white border transition-all duration-200 overflow-hidden ${
-                  isOpen
-                    ? 'border-[#0E2A62]/30 shadow-sm ring-1 ring-[#0E2A62]/10'
-                    : 'border-[#EAF4FF] shadow-2xs hover:border-[#0E2A62]/20'
-                }`}
+              <div 
+                key={idx}
+                className="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-2xs transition-colors"
               >
                 <button
-                  onClick={() => toggleItem(index)}
-                  className="w-full px-4 sm:px-5 py-3.5 sm:py-4 text-left flex items-center justify-between gap-3 font-display font-extrabold text-sm sm:text-base md:text-lg text-[#0E2A62] focus:outline-none cursor-pointer"
-                  aria-expanded={isOpen}
+                  onClick={() => toggleFaq(idx)}
+                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-heading font-semibold text-slate-900 text-base hover:text-blue-600 transition-colors cursor-pointer"
                 >
-                  <span>{item.question}</span>
-                  <div
-                    className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 bg-[#F6C945] text-[#0E2A62]' : 'bg-[#EAF4FF] text-[#0E2A62]'
-                    }`}
-                  >
-                    <ChevronDown className="w-3.5 h-3.5 stroke-[2.5]" />
-                  </div>
+                  <span>{item.q}</span>
+                  <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-200 flex-shrink-0 ${isOpen ? 'rotate-180 text-blue-600' : ''}`} />
                 </button>
 
                 {isOpen && (
-                  <div className="px-4 sm:px-5 pb-4 pt-0.5 text-xs sm:text-sm md:text-base text-[#0E2A62]/85 font-medium leading-relaxed border-t border-[#0E2A62]/5 animate-in fade-in duration-200">
-                    {item.answer}
+                  <div className="px-5 pb-5 pt-1 text-slate-600 text-sm sm:text-base leading-relaxed border-t border-slate-100 font-sans">
+                    {item.a}
                   </div>
                 )}
               </div>
