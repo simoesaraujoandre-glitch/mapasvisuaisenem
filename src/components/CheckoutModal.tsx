@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Check, ShieldCheck, Lock, QrCode, CreditCard, Sparkles, Copy, CheckCircle2, ArrowRight, Download, Smartphone, ExternalLink } from 'lucide-react';
 import { CHECKOUT_URLS } from '../data/contentData';
+import { useModalBehavior } from '../hooks/useModalBehavior';
 
 interface CheckoutModalProps {
   initialPlan: 'basic' | 'complete';
@@ -8,6 +9,8 @@ interface CheckoutModalProps {
 }
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({ initialPlan, onClose }) => {
+  useModalBehavior(true, onClose);
+
   const [selectedPlan, setSelectedPlan] = useState<'basic' | 'complete'>(initialPlan);
   const [paymentMethod, setPaymentMethod] = useState<'pix' | 'card'>('pix');
   const [name, setName] = useState('');
@@ -31,7 +34,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ initialPlan, onClo
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/75 backdrop-blur-xs animate-in fade-in duration-200">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/75 backdrop-blur-xs animate-in fade-in duration-200"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Checkout"
+    >
       <div 
         className="bg-white rounded-3xl max-w-lg w-full max-h-[95vh] overflow-y-auto shadow-2xl border border-slate-200 flex flex-col relative"
         onClick={(e) => e.stopPropagation()}

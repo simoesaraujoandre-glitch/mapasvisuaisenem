@@ -8,7 +8,7 @@ export const PainPoints: React.FC = () => {
       title: 'Estuda muito, mas entende pouco.',
       description:
         'Páginas enormes, explicações longas e fórmulas espalhadas fazem o aluno consumir muito conteúdo sem realmente entender como aplicar aquilo nas questões.',
-      image: '/img/pain_point_overload_1787776038013.jpg',
+      image: '/img/pain_point_overload_1787776038013.webp',
       imageAlt:
         'Estudante cercado por livros, cadernos, folhas e fórmulas, demonstrando sobrecarga e dificuldade para organizar o conteúdo.'
     },
@@ -18,7 +18,7 @@ export const PainPoints: React.FC = () => {
       title: 'Decora a fórmula, mas não sabe quando usar.',
       description:
         'Nos exercícios e simulados, basta o contexto da questão mudar para surgir a dúvida: qual fórmula usar e por onde começar?',
-      image: '/img/pain_formula_doubt_1787776051035.jpg',
+      image: '/img/pain_formula_doubt_1787776051035.webp',
       imageAlt:
         'Estudante diante de uma questão de Matemática, com diferentes fórmulas ao redor, demonstrando dúvida sobre qual caminho seguir.'
     },
@@ -28,7 +28,7 @@ export const PainPoints: React.FC = () => {
       title: 'Na hora de revisar, parece que precisa aprender tudo de novo.',
       description:
         'Quando o conteúdo fica espalhado entre vídeos, apostilas, PDFs e anotações, revisar se torna lento e encontrar o que realmente importa fica muito mais difícil.',
-      image: '/img/pain_review_mess_1787776062047.jpg',
+      image: '/img/pain_review_mess_1787776062047.webp',
       imageAlt:
         'Estudante diante de notebook, PDFs, cadernos e anotações diferentes tentando localizar o conteúdo que precisa revisar.'
     }
@@ -60,6 +60,8 @@ export const PainPoints: React.FC = () => {
                 <img
                   src={card.image}
                   alt={card.imageAlt}
+                  width={760}
+                  height={567}
                   loading="lazy"
                   decoding="async"
                   className="w-full h-full object-cover"
