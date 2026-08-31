@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { VisualSheetSample } from '../types';
 
 interface CurriculumProps {
@@ -120,7 +120,7 @@ const realMaterialPages: VisualSheetSample[] = [
     id: 'sheet-razao',
     title: 'Razão: Comparar, Dividir e Simplificar',
     category: 'Fundamentos',
-    imageUrl: '/img/mapa-razao.webp',
+    imageUrl: '/img/razao-comparar-dividir-e-simplificar-6.webp',
     themeColor: '#2563EB',
     highlightConcept: 'Comparação quantitativa entre grandezas, velocidade média, densidade e escalas.',
     summary: 'Estrutura esquematizada com exemplos visuais e aplicações práticas para o ENEM.',
@@ -131,7 +131,7 @@ const realMaterialPages: VisualSheetSample[] = [
     id: 'sheet-proporcao',
     title: 'Proporção: Razões em Equilíbrio',
     category: 'Fundamentos',
-    imageUrl: '/img/mapa-proporcao.webp',
+    imageUrl: '/img/proporcao-razoes-em-equilibrio-5.webp',
     themeColor: '#2563EB',
     highlightConcept: 'Propriedades da proporção direta e inversa com esquemas visuais.',
     summary: 'Relações de igualdade entre razões organizadas passo a passo.',
@@ -142,7 +142,7 @@ const realMaterialPages: VisualSheetSample[] = [
     id: 'sheet-porcentagem',
     title: 'Porcentagem: Parte de Cada 100',
     category: 'Matemática Financeira',
-    imageUrl: '/img/mapa-porcentagem.webp',
+    imageUrl: '/img/percentagem-parte-de-cada-100-2-11zon.webp',
     themeColor: '#2563EB',
     highlightConcept: 'Fatores de aumento e desconto esquematizados de forma rápida.',
     summary: 'Esquema visual para cálculo mental e resolução sem perda de tempo.',
@@ -153,7 +153,7 @@ const realMaterialPages: VisualSheetSample[] = [
     id: 'sheet-juros',
     title: 'Juros Simples: Crescimento Linear no ENEM',
     category: 'Matemática Financeira',
-    imageUrl: '/img/mapa-juros-simples.webp',
+    imageUrl: '/img/juros-simples-crescimento-linear-no-enem-1-11zon.webp',
     themeColor: '#2563EB',
     highlightConcept: 'Crescimento constante, fórmulas de juros e montante explicadas com clareza.',
     summary: 'Visualização da progressão linear aplicada a problemas do ENEM.',
@@ -164,7 +164,7 @@ const realMaterialPages: VisualSheetSample[] = [
     id: 'sheet-mmc-mdc',
     title: 'MMC e MDC: Ciclos ou Grupos',
     category: 'Fundamentos',
-    imageUrl: '/img/mapa-mmc-mdc.webp',
+    imageUrl: '/img/mmc-e-mdc-ciclos-ou-grupos-3-11zon.webp',
     themeColor: '#2563EB',
     highlightConcept: 'Diferenciação imediata entre ciclos periódicos (MMC) e divisão máxima (MDC).',
     summary: 'Mapa com gatilhos rápidos para você nunca mais confundir nos enunciados.',
@@ -175,7 +175,7 @@ const realMaterialPages: VisualSheetSample[] = [
     id: 'sheet-notacao',
     title: 'Notação Científica para o ENEM',
     category: 'Fundamentos',
-    imageUrl: '/img/mapa-notacao-cientifica.webp',
+    imageUrl: '/img/notacao-cientifica-para-o-enem-4.webp',
     themeColor: '#2563EB',
     highlightConcept: 'Representação de grandezas em base 10 e regra prática de deslocamento da vírgula.',
     summary: 'Aplicações frequentes em questões de Matemática e Ciências da Natureza.',
@@ -185,25 +185,45 @@ const realMaterialPages: VisualSheetSample[] = [
 ];
 
 export const Curriculum: React.FC<CurriculumProps> = ({ onOpenSample }) => {
+  const curriculumRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { rootMargin: '150px 0px', threshold: 0.05 }
+    );
+
+    if (curriculumRef.current) {
+      observer.observe(curriculumRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="conteudos" className="bg-white py-16 md:py-24 border-b border-[#E2E8F0]">
+    <section 
+      ref={curriculumRef} 
+      id="conteudos" 
+      className="bg-white py-16 md:py-24 border-b border-[#E2E8F0] [content-visibility:auto]"
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
-        {/* Nova Headline & Subheadline */}
+        {/* Section Headline & Subheadline */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
           <h2 className="font-heading font-extrabold text-slate-900 text-2xl sm:text-3xl md:text-4xl leading-tight mb-4 tracking-tight">
-            Os conteúdos de Matemática que você vai{' '}
-            <span className="text-blue-600">dominar na prática</span> com os{' '}
-            <span className="text-blue-600">Mapas Visuais</span>
+            Tudo o que você vai receber e aprender para dominar a Matemática do ENEM
           </h2>
 
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-sans max-w-2xl mx-auto">
-            Do básico aos conteúdos mais avançados do ENEM, tudo organizado de forma visual para você entender, revisar e aplicar com muito mais facilidade.
+            Os principais conteúdos de Matemática organizados em Mapas Visuais, para você entender, revisar e aplicar com muito mais facilidade na sua preparação para o ENEM.
           </p>
         </div>
 
         {/* 6 Blocos / Cards Organizados (3 por linha no desktop, 1 no mobile) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 mb-12 sm:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 mb-10 sm:mb-12">
           {curriculumCategories.map((category, idx) => (
             <div 
               key={idx}
@@ -229,33 +249,41 @@ export const Curriculum: React.FC<CurriculumProps> = ({ onOpenSample }) => {
           ))}
         </div>
 
+        {/* Bottom closing note */}
+        <div className="max-w-3xl mx-auto text-center mb-10">
+          <p className="text-slate-700 text-sm sm:text-base font-medium leading-relaxed bg-blue-50/60 border border-blue-100 rounded-xl py-3 px-5">
+            Tudo organizado visualmente para você encontrar o que precisa, entender o conteúdo e revisar sem se perder em páginas enormes de teoria.
+          </p>
+        </div>
+
         {/* ========================================================================= */}
         {/* SCROLL INFINITO COM AS IMAGENS DOS MAPAS MENTAIS ABAIXO DOS CARDS */}
         {/* ========================================================================= */}
         <div className="pt-2">
-          {/* Marquee Container com Scroll Infinito para a Direita */}
-          <div className="relative overflow-hidden py-3 mask-[linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-            <div className="animate-marquee-right flex items-center gap-6">
-              
-              {/* Renderiza a lista 2 vezes para loop contínuo infinito e sem saltos */}
+          <div className="relative overflow-hidden py-3">
+            {/* Smooth Edge Fades (GPU-friendly overlays) */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-white to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-white to-transparent z-10" />
+
+            <div 
+              className="animate-marquee-right flex items-center gap-4 sm:gap-6"
+              style={{ animationPlayState: isVisible ? 'running' : 'paused' }}
+            >
               {[...realMaterialPages, ...realMaterialPages].map((item, idx) => (
                 <div
                   key={`${item.id}-${idx}`}
-                  onClick={() => onOpenSample(item)}
-                  className="flex-shrink-0 cursor-pointer"
+                  className="flex-shrink-0 select-none pointer-events-none"
                 >
                   <img
                     src={item.imageUrl}
                     alt={item.title}
-                    width={1440}
-                    height={1019}
+                    draggable={false}
                     loading="lazy"
                     decoding="async"
-                    className="h-64 sm:h-80 md:h-96 w-auto object-contain rounded-xl shadow-md border border-slate-200/80"
+                    className="h-52 sm:h-72 md:h-84 w-auto object-contain rounded-xl shadow-md border border-slate-200/80 bg-white"
                   />
                 </div>
               ))}
-
             </div>
           </div>
         </div>

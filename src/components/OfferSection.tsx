@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, ShieldCheck, Zap, Sparkles, Lock, CreditCard, QrCode } from 'lucide-react';
+import { Check, ShieldCheck, Sparkles, Lock, QrCode } from 'lucide-react';
 import { CHECKOUT_URLS } from '../data/contentData';
 
 interface OfferSectionProps {
@@ -43,10 +43,8 @@ export const OfferSection: React.FC<OfferSectionProps> = ({ onSelectPlan }) => {
               {/* Product Image */}
               <div className="w-full flex items-center justify-center mb-6 py-2 px-4 bg-gradient-to-b from-slate-50 to-blue-50/30 rounded-2xl border border-slate-100/90 group">
                 <img
-                  src="/img/produto-basico.webp"
+                  src="/img/matematiaca-removebg-preview.webp"
                   alt="Matemática Visual ENEM - Plano Básico"
-                  width={420}
-                  height={420}
                   loading="lazy"
                   decoding="async"
                   className="h-40 sm:h-44 w-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300"
@@ -164,10 +162,8 @@ export const OfferSection: React.FC<OfferSectionProps> = ({ onSelectPlan }) => {
               {/* Product Image */}
               <div className="w-full flex items-center justify-center mb-6 py-2 px-4 bg-gradient-to-b from-blue-100/50 to-white rounded-2xl border border-blue-200/80 shadow-xs group">
                 <img
-                  src="/img/produto-completo.webp"
+                  src="/img/natematica-bonus-removebg-preview.webp"
                   alt="Preparação Visual ENEM Completa com Bônus"
-                  width={420}
-                  height={420}
                   loading="lazy"
                   decoding="async"
                   className="h-40 sm:h-44 w-auto object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-300"

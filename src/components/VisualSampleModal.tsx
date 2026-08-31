@@ -1,7 +1,6 @@
 import React from 'react';
 import { X } from 'lucide-react';
 import { VisualSheetSample } from '../types';
-import { useModalBehavior } from '../hooks/useModalBehavior';
 
 interface VisualSampleModalProps {
   sample: VisualSheetSample | null;
@@ -10,17 +9,12 @@ interface VisualSampleModalProps {
 }
 
 export const VisualSampleModal: React.FC<VisualSampleModalProps> = ({ sample, onClose }) => {
-  useModalBehavior(!!sample, onClose);
-
   if (!sample) return null;
 
   return (
     <div 
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-xs animate-in fade-in duration-200"
       onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-      aria-label={sample.title}
     >
       <div 
         className="relative max-w-4xl max-h-[90vh] flex flex-col items-center justify-center"
@@ -40,7 +34,6 @@ export const VisualSampleModal: React.FC<VisualSampleModalProps> = ({ sample, on
           <img 
             src={sample.imageUrl} 
             alt={sample.title} 
-            decoding="async"
             className="max-h-[85vh] max-w-full w-auto h-auto object-contain rounded-2xl shadow-2xl" 
           />
         )}

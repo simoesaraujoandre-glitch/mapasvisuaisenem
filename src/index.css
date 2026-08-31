@@ -36,35 +36,34 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 
 @keyframes scrollRight {
   0% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
   100% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes scrollLeft {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 .animate-marquee-right {
   display: flex;
   width: max-content;
-  animation: scrollRight 38s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  animation: scrollRight 28s linear infinite;
 }
 
 .animate-marquee-left {
   display: flex;
   width: max-content;
-  animation: scrollLeft 38s linear infinite;
-}
-
-.animate-marquee-right:hover,
-.animate-marquee-left:hover {
-  animation-play-state: paused;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  animation: scrollLeft 28s linear infinite;
 }

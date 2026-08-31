@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap, ShieldCheck, Download } from 'lucide-react';
+
 
 interface FinalCtaProps {
   onCtaClick: () => void;

@@ -1,21 +1,17 @@
-export interface ContentTopic {
-  title: string;
-  category: string;
-  items: string[];
-  iconName: string;
-  badgeCount: number;
-}
-
 export interface BonusItem {
   id: string;
   number: string;
   title: string;
+  lead?: string;
   description: string;
   originalPrice: string;
+  priceNote?: string;
   tag: string;
   color: string;
   bullets: string[];
   imageUrl?: string;
+  sampleImages?: string[];
+  orientation?: 'landscape' | 'portrait';
 }
 
 export interface Testimonial {

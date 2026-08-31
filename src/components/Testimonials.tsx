@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Star, CheckCircle } from 'lucide-react';
 import { testimonials } from '../data/contentData';
 import { Testimonial } from '../types';
@@ -38,10 +38,10 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ item }) => {
             <img
               src={item.image}
               alt={item.name}
-              width={200}
-              height={200}
               loading="lazy"
               decoding="async"
+              width={40}
+              height={40}
               className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-xs flex-shrink-0"
               onError={(e) => {
                 // Fallback se a imagem não carregar
@@ -71,6 +71,24 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ item }) => {
 };
 
 export const Testimonials: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { rootMargin: '150px 0px', threshold: 0.05 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   // Dividindo os depoimentos entre linha de cima (1º scroll) e linha de baixo (2º scroll)
   // Total de 8 depoimentos: 6 mulheres e 2 homens
   const topRowTestimonials = [
@@ -92,7 +110,7 @@ export const Testimonials: React.FC = () => {
   const bottomLoop = [...bottomRowTestimonials, ...bottomRowTestimonials, ...bottomRowTestimonials, ...bottomRowTestimonials];
 
   return (
-    <section id="depoimentos" className="bg-[#F8FAFC] py-16 md:py-24 border-b border-slate-200/70 overflow-hidden">
+    <section id="depoimentos" ref={sectionRef} className="bg-[#F8FAFC] py-16 md:py-24 border-b border-slate-200/70 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 mb-10 md:mb-14">
         
         {/* Section Header */}
@@ -116,7 +134,7 @@ export const Testimonials: React.FC = () => {
 
         {/* 1º Scroll: Passando para a DIREITA (scrollRight) */}
         <div className="w-full overflow-hidden flex">
-          <div className="animate-marquee-right flex py-1">
+          <div className="animate-marquee-right flex py-1" style={{ animationPlayState: isVisible ? 'running' : 'paused' }}>
             {topLoop.map((item, idx) => (
               <TestimonialCard key={`top-${item.id}-${idx}`} item={item} />
             ))}
@@ -125,7 +143,7 @@ export const Testimonials: React.FC = () => {
 
         {/* 2º Scroll: Passando para a ESQUERDA (scrollLeft / Sentido Contrário) */}
         <div className="w-full overflow-hidden flex">
-          <div className="animate-marquee-left flex py-1">
+          <div className="animate-marquee-left flex py-1" style={{ animationPlayState: isVisible ? 'running' : 'paused' }}>
             {bottomLoop.map((item, idx) => (
               <TestimonialCard key={`bottom-${item.id}-${idx}`} item={item} />
             ))}
