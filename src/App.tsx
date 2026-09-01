@@ -1,89 +1,67 @@
-import React, { useState } from 'react';
-import { Hero } from './components/Hero';
-import { Curriculum } from './components/Curriculum';
+import React from 'react';
+import { HeroSection } from './components/HeroSection';
+import { LearnSection } from './components/LearnSection';
 import { BonusSection } from './components/BonusSection';
 import { OfferSection } from './components/OfferSection';
-import { Testimonials } from './components/Testimonials';
-import { FinalCta } from './components/FinalCta';
+import { TestimonialsSection } from './components/TestimonialsSection';
+import { GuaranteeSection } from './components/GuaranteeSection';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
-import { VisualSampleModal } from './components/VisualSampleModal';
-import { CheckoutModal } from './components/CheckoutModal';
-import { VisualSheetSample } from './types';
+import { OFFER_SECTION_DATA } from './data/copyData';
+import { redirectToCheckout } from './utils/checkout';
 
 export default function App() {
-  const [selectedPlanForCheckout, setSelectedPlanForCheckout] = useState<'basic' | 'complete' | null>(null);
-  const [activeSampleModal, setActiveSampleModal] = useState<VisualSheetSample | null>(null);
+  const today = new Date();
+  const formattedDate = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getFullYear()).slice(-2)}`;
 
-  const handleOpenCheckout = (plan: 'basic' | 'complete' = 'basic') => {
-    const offerElement = document.getElementById('oferta');
-    if (offerElement) {
-      offerElement.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      setSelectedPlanForCheckout(plan);
+  const scrollToOffer = () => {
+    const offerEl = document.getElementById('oferta');
+    if (offerEl) {
+      offerEl.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  const handleCloseCheckout = () => {
-    setSelectedPlanForCheckout(null);
-  };
-
-  const handleOpenSample = (sample: VisualSheetSample) => {
-    setActiveSampleModal(sample);
-  };
-
-  const handleCloseSample = () => {
-    setActiveSampleModal(null);
+  const handleSelectPlan = (planId: 'basico' | 'completo' = 'completo') => {
+    const plan = OFFER_SECTION_DATA.plans.find((p) => p.id === planId);
+    if (plan && plan.checkoutUrl) {
+      redirectToCheckout(plan.checkoutUrl);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-700 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
-      <main className="flex-grow">
-        {/* 1. HERO */}
-        <Hero 
-          onCtaClick={() => handleOpenCheckout('basic')} 
-          onOpenSample={handleOpenSample} 
-        />
+    <div className="min-h-screen bg-white text-[#1F2937] flex flex-col selection:bg-[#F97316]/20 selection:text-[#172554]">
+      {/* Faixa Vermelha no Topo */}
+      <div className="w-full bg-red-600 text-white text-center py-2 px-4 text-xs sm:text-sm font-bold uppercase tracking-wide shadow-xs flex items-center justify-center gap-2">
+        <span>OFERTA VÁLIDA SOMENTE HOJE DIA {formattedDate}</span>
+        <span>•</span>
+        <span className="bg-white/20 px-2 py-0.5 rounded-sm">ATÉ 87% OFF</span>
+      </div>
 
-        {/* 2. O QUE VOCÊ VAI DOMINAR NA PRÁTICA */}
-        <Curriculum 
-          onOpenSample={handleOpenSample}
-          onCtaClick={() => handleOpenCheckout('basic')}
-        />
+      <main className="flex-1">
+        {/* 1. HERO */}
+        <HeroSection onCtaClick={scrollToOffer} />
+
+        {/* 2. TUDO O QUE VOCÊ VAI APRENDER */}
+        <LearnSection />
 
         {/* 3. BÔNUS */}
-        <BonusSection onOpenSample={handleOpenSample} />
+        <BonusSection />
 
         {/* 4. OFERTA */}
-        <OfferSection onSelectPlan={(plan) => handleOpenCheckout(plan)} />
+        <OfferSection onSelectPlan={(id) => handleSelectPlan(id as 'basico' | 'completo')} />
 
         {/* 5. DEPOIMENTOS */}
-        <Testimonials />
+        <TestimonialsSection />
 
-        {/* 6. CTA FINAL */}
-        <FinalCta onCtaClick={() => handleOpenCheckout('basic')} />
+        {/* 6. GARANTIA DE 7 DIAS */}
+        <GuaranteeSection />
 
-        {/* FAQ Section */}
-        <FaqSection />
+        {/* 7. FAQ + CTA FINAL */}
+        <FaqSection onFinalCtaClick={scrollToOffer} />
       </main>
 
-      {/* Footer */}
+      {/* Rodapé */}
       <Footer />
-
-      {/* Interactive Visual Map Zoom Modal */}
-      <VisualSampleModal 
-        sample={activeSampleModal} 
-        onClose={handleCloseSample}
-        onSelectPlan={(plan) => handleOpenCheckout(plan)}
-      />
-
-      {/* Interactive Checkout Modal (Pix & Card) */}
-      {selectedPlanForCheckout && (
-        <CheckoutModal 
-          initialPlan={selectedPlanForCheckout} 
-          onClose={handleCloseCheckout} 
-        />
-      )}
     </div>
   );
 }

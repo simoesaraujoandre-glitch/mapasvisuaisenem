@@ -1,183 +1,212 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Gift, BookOpen, PenTool, CheckSquare, Calendar } from 'lucide-react';
-import { bonusList } from '../data/contentData';
-import { BonusItem } from '../types';
+import React from 'react';
+import { BONUS_SECTION_DATA, BONUS_ITEMS } from '../data/copyData';
+import { BookMarked, PenTool, Award, Calculator, BookA, Gift } from 'lucide-react';
+import { MiniBonusCarousel } from './MiniBonusCarousel';
 
-interface BonusSectionProps {
-  onOpenSample?: (sample: any) => void;
-}
-
-interface BonusCarouselProps {
-  bonus: BonusItem;
-  isVisible: boolean;
-}
-
-const BonusImageCarousel: React.FC<BonusCarouselProps> = ({ bonus, isVisible }) => {
-  if (!bonus.sampleImages || bonus.sampleImages.length === 0) return null;
-
-  const isPortrait = bonus.orientation === 'portrait';
-  // Duplicate for seamless loop
-  const displayImages = [...bonus.sampleImages, ...bonus.sampleImages];
-  
-  // Consistent, steady speed across all cards
-  const duration = isPortrait 
-    ? (bonus.sampleImages.length <= 4 ? '26s' : '30s') 
-    : (bonus.sampleImages.length <= 5 ? '28s' : '32s');
-
-  return (
-    <div className="mt-4 pt-4 border-t border-slate-100/90 overflow-hidden w-full pointer-events-none select-none">
-      <div className="relative w-full overflow-hidden rounded-xl bg-slate-50/70 py-1.5 px-0.5">
-        {/* Soft edge gradients */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-slate-50 to-transparent z-10" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-slate-50 to-transparent z-10" />
-
-        <div 
-          className="animate-marquee-right flex items-center gap-2.5 sm:gap-3"
-          style={{ 
-            animationDuration: duration,
-            animationPlayState: isVisible ? 'running' : 'paused'
-          }}
-        >
-          {displayImages.map((imgSrc, imgIdx) => (
-            <div
-              key={imgIdx}
-              className={`relative flex-shrink-0 rounded-lg overflow-hidden border border-slate-200/80 bg-white shadow-2xs ${
-                isPortrait 
-                  ? 'h-28 sm:h-38 w-[76px] sm:w-[104px] aspect-[1/1.414]' 
-                  : 'h-20 sm:h-28 w-[130px] sm:w-[180px] aspect-[16/10]'
-              }`}
-            >
-              <img
-                src={imgSrc}
-                alt={`${bonus.title} ${imgIdx + 1}`}
-                loading="lazy"
-                decoding="async"
-                draggable={false}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-contain rounded-md block"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export const BonusSection: React.FC<BonusSectionProps> = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { rootMargin: '100px 0px', threshold: 0.05 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const getBonusIcon = (id: string) => {
-    switch (id) {
-      case 'bonus-1': return <BookOpen className="w-5 h-5" />;
-      case 'bonus-2': return <PenTool className="w-5 h-5" />;
-      case 'bonus-3': return <CheckSquare className="w-5 h-5" />;
-      case 'bonus-4': return <Calendar className="w-5 h-5" />;
-      default: return <Gift className="w-5 h-5" />;
-    }
+export const BonusSection: React.FC = () => {
+  const bonusIcons: Record<string, React.ReactNode> = {
+    "bonus-1": <BookMarked className="w-5 h-5 text-[#F97316]" />,
+    "bonus-2": <PenTool className="w-5 h-5 text-[#F97316]" />,
+    "bonus-3": <Award className="w-5 h-5 text-[#F97316]" />,
+    "bonus-4": <Calculator className="w-5 h-5 text-[#F97316]" />,
+    "bonus-5": <BookA className="w-5 h-5 text-[#F97316]" />,
   };
 
+  const bonusCoverImages: Record<string, string> = {
+    "bonus-1": "/images/bonus1.webp",
+    "bonus-2": "/images/bonus2.webp",
+    "bonus-3": "/images/bonus3.webp",
+    "bonus-4": "/images/bonus4.webp",
+    "bonus-5": "/images/bonus5.webp",
+  };
+
+  const bonusImages: Record<string, { src: string; alt: string }[]> = {
+    "bonus-1": [
+      { src: '/images/bonus1-demo-1.webp', alt: 'Repertório Sociocultural 1' },
+      { src: '/images/bonus1-demo-2.webp', alt: 'Repertório Sociocultural 2' },
+      { src: '/images/bonus1-demo-3.webp', alt: 'Repertório Sociocultural 3' },
+      { src: '/images/bonus1-demo-4.webp', alt: 'Repertório Sociocultural 4' },
+      { src: '/images/bonus1-demo-5.webp', alt: 'Repertório Sociocultural 5' },
+      { src: '/images/bonus1-demo-6.webp', alt: 'Repertório Sociocultural 6' },
+    ],
+    "bonus-2": [
+      { src: '/images/bonus2-demo-1.webp', alt: 'Temas para Treinar 1' },
+      { src: '/images/bonus2-demo-2.webp', alt: 'Temas para Treinar 2' },
+      { src: '/images/bonus2-demo-3.webp', alt: 'Temas para Treinar 3' },
+      { src: '/images/bonus2-demo-4.webp', alt: 'Temas para Treinar 4' },
+      { src: '/images/bonus2-demo-5.webp', alt: 'Temas para Treinar 5' },
+    ],
+    "bonus-3": [
+      { src: '/images/bonus3-demo-1.webp', alt: 'Redações Nota 1000 Comentadas 1' },
+      { src: '/images/bonus3-demo-2.webp', alt: 'Redações Nota 1000 Comentadas 2' },
+      { src: '/images/bonus3-demo-3.webp', alt: 'Redações Nota 1000 Comentadas 3' },
+      { src: '/images/bonus3-demo-4.webp', alt: 'Redações Nota 1000 Comentadas 4' },
+      { src: '/images/bonus3-demo-5.webp', alt: 'Redações Nota 1000 Comentadas 5' },
+    ],
+    "bonus-4": [
+      { src: '/images/matematica-1.webp', alt: 'Matemática ENEM 1' },
+      { src: '/images/matematica-2.webp', alt: 'Matemática ENEM 2' },
+      { src: '/images/matematica-3.webp', alt: 'Matemática ENEM 3' },
+      { src: '/images/matematica-4.webp', alt: 'Matemática ENEM 4' },
+      { src: '/images/matematica-5.webp', alt: 'Matemática ENEM 5' },
+    ],
+    "bonus-5": [
+      { src: '/images/linguagens-2.webp', alt: 'Linguagens ENEM 2' },
+      { src: '/images/linguagens-3.webp', alt: 'Linguagens ENEM 3' },
+      { src: '/images/linguagens-4.webp', alt: 'Linguagens ENEM 4' },
+      { src: '/images/linguagens-5.webp', alt: 'Linguagens ENEM 5' },
+      { src: '/images/linguagens-6.webp', alt: 'Linguagens ENEM 6' },
+    ],
+  };
+
+  const redacaoBonus = BONUS_ITEMS.filter((item) => item.category === 'redacao');
+  const geralBonus = BONUS_ITEMS.filter((item) => item.category === 'geral');
+
   return (
-    <section 
-      ref={sectionRef} 
-      id="bonus" 
-      className="bg-[#F7FAFF] py-16 md:py-24 border-b border-slate-200/70 [content-visibility:auto]"
-    >
+    <section id="bonus" className="bg-white py-12 sm:py-20 lg:py-24 border-b border-[#E5E7EB]/60">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 px-3.5 py-1.5 rounded-full text-xs font-bold text-blue-700 uppercase tracking-wider mb-4">
-            <Gift className="w-3.5 h-3.5" />
-            <span>Presentes Exclusivos</span>
+        {/* CABEÇALHO DA SEÇÃO */}
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-2 bg-[#FFF1E8] border border-[#F97316]/20 px-3.5 py-1 rounded-full mb-3">
+            <Gift className="w-3.5 h-3.5 text-[#F97316]" />
+            <span className="text-xs font-bold uppercase tracking-wider text-[#F97316]">
+              {BONUS_SECTION_DATA.smallBadge}
+            </span>
           </div>
-
-          <h2 className="font-heading font-extrabold text-slate-900 text-2xl sm:text-3xl md:text-4xl leading-tight mb-4">
-            E para completar sua preparação, desenvolvemos 4 bônus exclusivos
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#172554] tracking-tight leading-tight mb-3 sm:mb-4">
+            {BONUS_SECTION_DATA.headline}
           </h2>
-
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-sans max-w-2xl mx-auto">
-            Cada bônus foi criado para complementar o material principal e deixar seus estudos para o ENEM mais completos, com novos conteúdos, prática e organização.
+          <p className="text-sm sm:text-base text-[#475569] leading-relaxed font-normal">
+            {BONUS_SECTION_DATA.subheadline}
           </p>
         </div>
 
-        {/* 4 Bonus Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {bonusList.map((bonus) => (
-            <div 
+        {/* PRIMEIRA LINHA: 3 BÔNUS DE REDAÇÃO */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 mb-5 sm:mb-6">
+          {redacaoBonus.map((bonus) => (
+            <div
               key={bonus.id}
-              className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-7 hover:border-blue-300 hover:shadow-md transition-all duration-200 flex flex-col justify-between items-center text-center group [content-visibility:auto]"
+              id={`card-${bonus.id}`}
+              className="bg-white rounded-2xl border border-[#E5E7EB] p-5 sm:p-6 shadow-2xs hover:border-[#F97316]/40 hover:shadow-xs transition-all flex flex-col justify-between items-center text-center"
             >
-              <div className="w-full flex flex-col items-center text-center">
-                {/* Bonus Cover / Mockup Header Centered */}
-                <div className="relative w-28 h-36 sm:w-32 sm:h-40 bg-gradient-to-b from-slate-50 to-blue-50/40 rounded-xl p-1.5 shadow-sm border border-slate-200/80 flex items-center justify-center overflow-hidden group-hover:scale-105 group-hover:shadow-md transition-all duration-200 mb-4 mx-auto">
-                  {bonus.imageUrl ? (
-                    <img 
-                      src={bonus.imageUrl} 
-                      alt={bonus.title}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-contain drop-shadow-md"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-blue-600 to-slate-900 rounded-lg p-2 flex flex-col justify-between text-white">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[8px] font-bold uppercase tracking-wider bg-white/20 px-1 py-0.5 rounded">
-                          ENEM
-                        </span>
-                        {getBonusIcon(bonus.id)}
-                      </div>
-                      <div className="text-[9px] font-heading font-bold leading-tight line-clamp-2">
-                        {bonus.title}
-                      </div>
-                      <div className="text-[7px] text-blue-200 font-mono">
-                        PDF HD • Digital
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Title & Tag Centered */}
-                <h3 className="font-heading font-bold text-slate-900 text-lg sm:text-xl group-hover:text-blue-600 transition-colors text-center">
-                  <span className="text-blue-600 font-extrabold">{bonus.number}</span> — {bonus.title}
-                </h3>
-
-                {bonus.lead && (
-                  <p className="text-xs sm:text-sm font-semibold text-slate-800 mt-1.5 leading-snug text-center max-w-md">
-                    {bonus.lead}
-                  </p>
-                )}
-
-                <div className="mt-2.5">
-                  <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 inline-block px-3 py-1 rounded-md border border-emerald-200/60 text-center">
-                    {bonus.priceNote || `Valor avulso: ${bonus.originalPrice} — GRÁTIS no Plano Completo`}
+              <div className="w-full flex flex-col items-center">
+                {/* Visual Header / Tag */}
+                <div className="flex items-center justify-between w-full mb-3.5 sm:mb-4">
+                  <span className="text-xs font-extrabold text-[#F97316] bg-[#FFF1E8] px-3 py-1 rounded-full uppercase tracking-wider">
+                    {bonus.tag}
                   </span>
+                  <div className="w-8 h-8 rounded-xl bg-[#FFF9F5] border border-[#F97316]/20 flex items-center justify-center">
+                    {bonusIcons[bonus.id]}
+                  </div>
                 </div>
 
-                {/* Description Centered */}
-                <p className="text-slate-600 text-sm leading-relaxed font-sans mt-3 text-center max-w-md">
+                {/* Imagem do Bônus Centralizada */}
+                <div className="w-full flex items-center justify-center p-2 sm:p-3 mb-3.5 sm:mb-4 rounded-xl bg-[#F8FAFC] border border-[#F1F5F9]">
+                  <img
+                    src={bonusCoverImages[bonus.id]}
+                    alt={bonus.title}
+                    width={420}
+                    height={420}
+                    className="w-full max-w-[180px] sm:max-w-[200px] h-40 sm:h-48 object-contain drop-shadow-sm rounded-md"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+
+                {/* Title and Description */}
+                <h3 className="font-heading text-base font-bold text-[#172554] mb-2 tracking-tight">
+                  {bonus.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#475569] leading-relaxed mb-4">
                   {bonus.description}
                 </p>
+
+                {/* Ancoragem de Valor do Bônus */}
+                <div className="w-full pt-3 border-t border-gray-100 flex flex-col items-center gap-1.5">
+                  <span className="text-xs text-gray-400 font-medium">
+                    VALOR AVULSO: <span className="line-through font-semibold">{bonus.individualValue}</span>
+                  </span>
+                  <div className="text-xs font-bold text-[#16A34A] bg-[#DCFCE7] px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
+                    <span className="text-sm font-extrabold text-[#16A34A]">GRÁTIS</span>
+                    <span className="text-[11px] font-semibold text-[#15803d]">NO PLANO COMPLETO</span>
+                  </div>
+                </div>
               </div>
 
-              {/* Automatic Seamless Marquee Scrolling to the Right */}
-              <BonusImageCarousel bonus={bonus} isVisible={isVisible} />
+              {bonusImages[bonus.id] && (
+                <MiniBonusCarousel
+                  images={bonusImages[bonus.id]}
+                  title={
+                    bonus.id === 'bonus-1'
+                      ? 'Prévia dos Repertórios'
+                      : bonus.id === 'bonus-2'
+                      ? 'Prévia dos Temas'
+                      : bonus.id === 'bonus-3'
+                      ? 'Prévia das Redações Nota 1000'
+                      : 'Prévia dos Mapas Inclusos'
+                  }
+                />
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* SEGUNDA LINHA: 2 BÔNUS GERAIS (MATEMÁTICA E LINGUAGENS) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto mb-8 sm:mb-12">
+          {geralBonus.map((bonus) => (
+            <div
+              key={bonus.id}
+              id={`card-${bonus.id}`}
+              className="bg-white rounded-2xl border border-[#E5E7EB] p-5 sm:p-6 shadow-2xs hover:border-[#F97316]/40 hover:shadow-xs transition-all flex flex-col justify-between items-center text-center"
+            >
+              <div className="w-full flex flex-col items-center">
+                {/* Visual Header / Tag */}
+                <div className="flex items-center justify-between w-full mb-3.5 sm:mb-4">
+                  <span className="text-xs font-extrabold text-[#F97316] bg-[#FFF1E8] px-3 py-1 rounded-full uppercase tracking-wider">
+                    {bonus.tag}
+                  </span>
+                  <div className="w-8 h-8 rounded-xl bg-[#FFF9F5] border border-[#F97316]/20 flex items-center justify-center">
+                    {bonusIcons[bonus.id]}
+                  </div>
+                </div>
+
+                {/* Imagem do Bônus Centralizada */}
+                <div className="w-full flex items-center justify-center p-2 sm:p-3 mb-3.5 sm:mb-4 rounded-xl bg-[#F8FAFC] border border-[#F1F5F9]">
+                  <img
+                    src={bonusCoverImages[bonus.id]}
+                    alt={bonus.title}
+                    width={420}
+                    height={420}
+                    className="w-full max-w-[200px] sm:max-w-[220px] h-40 sm:h-48 object-contain drop-shadow-sm rounded-md"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+
+                {/* Title and Description */}
+                <h3 className="font-heading text-base font-bold text-[#172554] mb-2 tracking-tight">
+                  {bonus.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#475569] leading-relaxed mb-4">
+                  {bonus.description}
+                </p>
+
+                {/* Ancoragem de Valor do Bônus */}
+                <div className="w-full pt-3 border-t border-gray-100 flex flex-col items-center gap-1.5">
+                  <span className="text-xs text-gray-400 font-medium">
+                    VALOR AVULSO: <span className="line-through font-semibold">{bonus.individualValue}</span>
+                  </span>
+                  <div className="text-xs font-bold text-[#16A34A] bg-[#DCFCE7] px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
+                    <span className="text-sm font-extrabold text-[#16A34A]">GRÁTIS</span>
+                    <span className="text-[11px] font-semibold text-[#15803d]">NO PLANO COMPLETO</span>
+                  </div>
+                </div>
+              </div>
+
+              {bonusImages[bonus.id] && (
+                <MiniBonusCarousel images={bonusImages[bonus.id]} />
+              )}
             </div>
           ))}
         </div>
@@ -186,4 +215,3 @@ export const BonusSection: React.FC<BonusSectionProps> = () => {
     </section>
   );
 };
-

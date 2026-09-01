@@ -1,281 +1,219 @@
 import React from 'react';
-import { Check, ShieldCheck, Sparkles, Lock, QrCode } from 'lucide-react';
-import { CHECKOUT_URLS } from '../data/contentData';
+import { Check, Sparkles, ShieldCheck } from 'lucide-react';
+import { OFFER_SECTION_DATA } from '../data/copyData';
+import { ProductMockupCard } from './ProductMockupCard';
+import { getCheckoutUrlWithParams } from '../utils/checkout';
 
 interface OfferSectionProps {
-  onSelectPlan: (plan: 'basic' | 'complete') => void;
+  onSelectPlan?: (planId: string) => void;
 }
 
 export const OfferSection: React.FC<OfferSectionProps> = ({ onSelectPlan }) => {
+  const [basicPlan, completePlan] = OFFER_SECTION_DATA.plans;
+
+  const handleAction = (planId: 'basico' | 'completo', e?: React.MouseEvent) => {
+    if (onSelectPlan) {
+      e?.preventDefault();
+      onSelectPlan(planId);
+    }
+  };
+
   return (
-    <section id="oferta" className="bg-[#F8FAFC] py-16 md:py-24 border-b border-slate-200/80 relative">
+    <section id="oferta" className="bg-[#FFF9F5] py-12 sm:py-20 lg:py-24 border-b border-[#E5E7EB]/60">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <h2 className="font-heading font-extrabold text-slate-900 text-3xl sm:text-4xl md:text-5xl leading-tight mb-4">
-            Escolha sua preparação para o ENEM
+        {/* CABEÇALHO DA SEÇÃO */}
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <div className="inline-block bg-[#FFF1E8] border border-[#F97316]/20 px-3.5 py-1 rounded-full mb-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#F97316]">
+              PLANOS DE ACESSO
+            </span>
+          </div>
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#172554] tracking-tight leading-tight">
+            {OFFER_SECTION_DATA.headline}
           </h2>
         </div>
 
-        {/* 2 Offer Pricing Cards Side by Side */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch mb-14">
+        {/* OS DOIS PLANOS LADO A LADO */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-stretch max-w-5xl mx-auto">
           
-          {/* ======================================================== */}
-          {/* PLANO 1: PLANO BÁSICO - MATEMÁTICA VISUAL ENEM (R$ 10) */}
-          {/* ======================================================== */}
-          <div className="bg-white rounded-3xl border-2 border-blue-200 p-6 sm:p-8 shadow-sm flex flex-col justify-between relative hover:border-blue-400 hover:shadow-md transition-all">
-            
+          {/* ==============================
+              PLANO BÁSICO (R$10)
+             ============================== */}
+          <div 
+            id="plano-basico"
+            className="bg-white rounded-3xl border border-[#E5E7EB] hover:border-[#F97316]/30 p-5 sm:p-7 md:p-8 shadow-xs flex flex-col justify-between transition-all"
+          >
             <div>
               {/* Header */}
-              <div className="border-b border-slate-100 pb-4 mb-4 text-center">
-                <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-1">
-                  PLANO BÁSICO
+              <div className="flex flex-col items-center justify-center text-center mb-5">
+                <span className="text-xs sm:text-sm font-extrabold text-[#F97316] bg-[#FFF7ED] border border-[#FFEDD5] px-3.5 py-1 rounded-full uppercase tracking-wider mb-2">
+                  {basicPlan.name}
                 </span>
-                <h3 className="font-heading font-extrabold text-slate-900 text-2xl sm:text-3xl">
-                  MATEMÁTICA VISUAL ENEM
+                <h3 className="font-heading text-xl sm:text-2xl font-extrabold text-[#172554] mb-1">
+                  REDAÇÃO ENEM VISUAL
                 </h3>
-                <p className="text-slate-600 text-sm mt-1.5 leading-snug">
-                  Ideal para quem quer focar totalmente em destravar Matemática.
+                <p className="text-xs sm:text-sm text-[#475569]">
+                  {basicPlan.subtitle}
                 </p>
               </div>
 
-              {/* Product Image */}
-              <div className="w-full flex items-center justify-center mb-6 py-2 px-4 bg-gradient-to-b from-slate-50 to-blue-50/30 rounded-2xl border border-slate-100/90 group">
-                <img
-                  src="/img/matematiaca-removebg-preview.webp"
-                  alt="Matemática Visual ENEM - Plano Básico"
-                  loading="lazy"
-                  decoding="async"
-                  className="h-40 sm:h-44 w-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300"
-                />
+              {/* Mockup do Produto Básico */}
+              <div className="mb-6">
+                <ProductMockupCard type="offer-basic" />
               </div>
 
-              {/* Checklist */}
-              <div className="space-y-3 mb-8">
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-slate-700 text-sm font-medium">Todo o material visual de Matemática</span>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-slate-700 text-sm font-medium">Conteúdos do básico ao avançado</span>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-slate-700 text-sm font-medium">Fórmulas, conceitos e exemplos</span>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-slate-700 text-sm font-medium">Material 100% digital</span>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-slate-700 text-sm font-medium">Acesso pelo celular, tablet ou computador</span>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-slate-700 text-sm font-medium">Acesso imediato</span>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-slate-700 text-sm font-medium">Garantia de 7 dias</span>
-                </div>
+              {/* VOCÊ RECEBE: Checklist */}
+              <div className="mb-6">
+                <span className="text-xs font-bold text-[#172554] uppercase tracking-wider block mb-3">
+                  VOCÊ RECEBE:
+                </span>
+                <ul className="space-y-2.5">
+                  {basicPlan.features.map((feat, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#1F2937] font-medium">
+                      <div className="w-4 h-4 rounded-full bg-[#16A34A]/10 text-[#16A34A] flex items-center justify-center shrink-0 mt-0.5">
+                        <Check className="w-3 h-3 stroke-[2.5]" />
+                      </div>
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
-            {/* Pricing and Button */}
-            <div>
-              <div className="bg-slate-50 rounded-2xl p-4 mb-5 text-center border border-slate-100">
-                <div className="text-xs text-slate-600 font-medium">
-                  De <span className="line-through">R$ 59,90</span>
+            {/* PREÇO E CTA DO BÁSICO */}
+            <div className="pt-6 border-t border-gray-100 text-center">
+              <div className="mb-4 flex flex-col items-center justify-center">
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  {basicPlan.oldPrice && (
+                    <span className="text-xs text-gray-400 font-semibold line-through">
+                      {basicPlan.oldPrice}
+                    </span>
+                  )}
+                  {basicPlan.discountBadge && (
+                    <span className="text-[10px] font-bold text-gray-500 bg-gray-100 border border-gray-200 px-1.5 py-0.5 rounded">
+                      {basicPlan.discountBadge}
+                    </span>
+                  )}
                 </div>
-                <div className="flex items-baseline justify-center gap-1 mt-1">
-                  <span className="text-sm font-bold text-slate-700">Hoje por apenas</span>
-                  <span className="font-heading font-extrabold text-blue-600 text-4xl sm:text-5xl tracking-tight">
-                    R$ 10
+                <div className="flex items-baseline justify-center gap-2">
+                  <span className="text-xs text-gray-500 font-medium">POR APENAS:</span>
+                  <span className="font-heading text-4xl sm:text-5xl font-extrabold text-[#F97316] tracking-tight">
+                    {basicPlan.price}
                   </span>
                 </div>
-                <span className="text-[11px] text-slate-500 font-medium block mt-1">
-                  Pagamento único • Sem mensalidade
+                <span className="text-xs text-gray-500 font-medium block mt-0.5">
+                  {basicPlan.period}
                 </span>
               </div>
 
               <a
-                href={CHECKOUT_URLS.basic}
-                onClick={(e) => {
-                  onSelectPlan('basic');
-                }}
-                className="w-full py-4 px-6 bg-blue-600 hover:bg-blue-700 active:scale-98 text-white font-heading font-bold text-base sm:text-lg rounded-xl shadow-md shadow-blue-600/20 hover:shadow-lg transition-all cursor-pointer text-center block"
+                href={getCheckoutUrlWithParams(basicPlan.checkoutUrl)}
+                onClick={(e) => handleAction('basico', e)}
+                id="btn-plano-basico"
+                className="w-full min-h-[48px] bg-[#F97316] hover:bg-[#ea580c] active:scale-[0.99] text-white font-heading font-bold text-sm sm:text-base py-3.5 px-6 rounded-xl shadow-xs transition-all text-center cursor-pointer tracking-wide flex items-center justify-center gap-2"
               >
-                QUERO DESTRAVAR A MATEMÁTICA
+                <span>{basicPlan.ctaText}</span>
               </a>
-            </div>
 
+              <div className="mt-3 flex items-center justify-center gap-1.5 text-xs text-gray-500">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#16A34A] shrink-0" />
+                <span>Garantia incondicional de 7 dias</span>
+              </div>
+            </div>
           </div>
 
-          {/* ======================================================== */}
-          {/* PLANO 2: PLANO COMPLETO - PREPARAÇÃO VISUAL ENEM (R$ 27,90) */}
-          {/* ======================================================== */}
-          <div className="bg-gradient-to-b from-blue-50/70 to-white rounded-3xl border-2 border-blue-600 p-6 sm:p-8 shadow-lg flex flex-col justify-between relative ring-2 ring-blue-600/20">
-            
-            {/* Top Badge */}
-            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-heading font-bold px-4 py-1 rounded-full shadow-md uppercase tracking-wider flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 fill-white" />
-              <span>Mais Completo • Melhor Escolha</span>
-            </div>
-
+          {/* ==============================
+              PLANO COMPLETO (R$29,90) - DESTACADO
+             ============================== */}
+          <div 
+            id="plano-completo"
+            className="bg-[#FFF9F5] rounded-3xl border-2 border-[#F97316] p-5 sm:p-7 md:p-8 shadow-md relative flex flex-col justify-between transition-all"
+          >
             <div>
               {/* Header */}
-              <div className="border-b border-blue-100 pb-4 mb-4 pt-2 text-center">
-                <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-1">
-                  PLANO COMPLETO
+              <div className="flex flex-col items-center justify-center text-center mb-5">
+                <span className="text-xs sm:text-sm font-extrabold text-white bg-[#F97316] px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 shadow-xs flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  {completePlan.badge || "MELHOR CUSTO-BENEFÍCIO"}
                 </span>
-                <h3 className="font-heading font-extrabold text-slate-900 text-2xl sm:text-3xl">
-                  PREPARAÇÃO VISUAL ENEM
+                <h3 className="font-heading text-xl sm:text-2xl font-extrabold text-[#172554] mb-1">
+                  PACOTE COMPLETO ENEM
                 </h3>
-                <p className="text-slate-600 text-sm mt-1.5 leading-snug">
-                  A preparação definitiva com todos os 4 bônus para elevar sua nota.
+                <p className="text-xs sm:text-sm text-[#475569]">
+                  {completePlan.subtitle}
                 </p>
               </div>
 
-              {/* Product Image */}
-              <div className="w-full flex items-center justify-center mb-6 py-2 px-4 bg-gradient-to-b from-blue-100/50 to-white rounded-2xl border border-blue-200/80 shadow-xs group">
-                <img
-                  src="/img/natematica-bonus-removebg-preview.webp"
-                  alt="Preparação Visual ENEM Completa com Bônus"
-                  loading="lazy"
-                  decoding="async"
-                  className="h-40 sm:h-44 w-auto object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-300"
-                />
+              {/* Mockup do Pacote Completo */}
+              <div className="mb-6">
+                <ProductMockupCard type="offer-complete" />
               </div>
 
-              {/* Checklist */}
-              <div className="space-y-3 mb-8">
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-slate-800 text-sm font-semibold">Todo o material visual de Matemática</span>
-                </div>
-
-                <div className="flex items-start gap-3 bg-blue-100/50 p-1.5 rounded-lg">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-white mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-blue-900 text-sm font-bold">🎁 Mapas Visuais de Linguagens</span>
-                </div>
-
-                <div className="flex items-start gap-3 bg-blue-100/50 p-1.5 rounded-lg">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-white mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-blue-900 text-sm font-bold">🎁 Mapas Visuais de Redação</span>
-                </div>
-
-                <div className="flex items-start gap-3 bg-blue-100/50 p-1.5 rounded-lg">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-white mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-blue-900 text-sm font-bold">🎁 50 Exercícios de Fixação</span>
-                </div>
-
-                <div className="flex items-start gap-3 bg-blue-100/50 p-1.5 rounded-lg">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-white mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-blue-900 text-sm font-bold">🎁 Plano de Revisão de 7, 15 e 30 dias</span>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-slate-700 text-sm font-medium">Material 100% digital</span>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-slate-700 text-sm font-medium">Acesso imediato</span>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span className="text-slate-700 text-sm font-medium">Garantia de 7 dias</span>
-                </div>
+              {/* VOCÊ RECEBE: Checklist */}
+              <div className="mb-6">
+                <span className="text-xs font-bold text-[#172554] uppercase tracking-wider block mb-3">
+                  VOCÊ RECEBE:
+                </span>
+                <ul className="space-y-2.5">
+                  {completePlan.features.map((feat, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#1F2937] font-semibold">
+                      <div className="w-4 h-4 rounded-full bg-[#16A34A]/20 text-[#16A34A] flex items-center justify-center shrink-0 mt-0.5">
+                        <Check className="w-3 h-3 stroke-[2.5]" />
+                      </div>
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
-            {/* Pricing and Button */}
-            <div>
-              <div className="bg-blue-100/60 rounded-2xl p-4 mb-5 text-center border border-blue-200">
-                <div className="text-xs text-slate-500 font-medium">
-                  Valor dos materiais: <span className="line-through">R$ 184,90</span>
+            {/* PREÇO E CTA DO COMPLETO */}
+            <div className="pt-6 border-t border-[#F97316]/20 bg-[#FFF1E8]/70 -mx-5 sm:-mx-7 md:-mx-8 -mb-5 sm:-mb-7 md:-mb-8 p-5 sm:p-7 md:p-8 rounded-b-3xl text-center">
+              <div className="mb-4 flex flex-col items-center justify-center">
+                {/* Ancoragem de Valor Total do Pacote */}
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <span className="text-xs text-gray-500 font-semibold uppercase tracking-wider">
+                    VALOR TOTAL:
+                  </span>
+                  <span className="text-xs sm:text-sm text-gray-400 font-bold line-through">
+                    {completePlan.totalPackageValue}
+                  </span>
+                  {completePlan.discountBadge && (
+                    <span className="text-[11px] font-extrabold text-white bg-red-600 px-2 py-0.5 rounded-full shadow-2xs">
+                      {completePlan.discountBadge}
+                    </span>
+                  )}
                 </div>
-                <div className="flex items-baseline justify-center gap-1 mt-1">
-                  <span className="text-sm font-bold text-slate-700">Hoje por</span>
-                  <span className="font-heading font-extrabold text-blue-700 text-4xl sm:text-5xl tracking-tight">
-                    R$ 27,90
+
+                <div className="flex items-baseline justify-center gap-2">
+                  <span className="text-xs font-bold text-[#172554]">HOJE POR APENAS:</span>
+                  <span className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#F97316] tracking-tight">
+                    {completePlan.price}
                   </span>
                 </div>
-                <span className="text-[11px] text-blue-700 font-semibold block mt-1">
-                  Economia de R$ 157,00 (85% OFF)
+                <span className="text-xs text-gray-600 font-medium block mt-0.5">
+                  {completePlan.period}
                 </span>
               </div>
 
               <a
-                href={CHECKOUT_URLS.complete}
-                onClick={(e) => {
-                  onSelectPlan('complete');
-                }}
-                className="w-full py-4 px-6 bg-blue-600 hover:bg-blue-700 active:scale-98 text-white font-heading font-bold text-base sm:text-lg rounded-xl shadow-lg shadow-blue-600/30 hover:shadow-xl transition-all cursor-pointer text-center block"
+                href={getCheckoutUrlWithParams(completePlan.checkoutUrl)}
+                onClick={(e) => handleAction('completo', e)}
+                id="btn-plano-completo"
+                className="w-full min-h-[48px] bg-[#F97316] hover:bg-[#ea580c] active:scale-[0.99] text-white font-heading font-bold text-base sm:text-lg py-4 px-6 rounded-xl shadow-md hover:shadow-lg transition-all text-center cursor-pointer tracking-wide flex items-center justify-center gap-2"
               >
-                QUERO A PREPARAÇÃO COMPLETA
+                <span>{completePlan.ctaText}</span>
               </a>
+
+              <div className="mt-3 flex items-center justify-center gap-1.5 text-xs text-gray-500 font-medium">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#16A34A] shrink-0" />
+                <span>Garantia de 7 dias • Acesso imediato a todos os bônus</span>
+              </div>
             </div>
 
           </div>
 
-        </div>
-
-        {/* Security & Guarantee Badges Footer inside Offer */}
-        <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-slate-100 text-center">
-          <div className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-600">
-            <Lock className="w-4 h-4 text-emerald-600" />
-            <span>Compra 100% Segura (SSL 256-bit)</span>
-          </div>
-          <div className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-600">
-            <ShieldCheck className="w-4 h-4 text-blue-600" />
-            <span>Garantia Incondicional de 7 Dias</span>
-          </div>
-          <div className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-600">
-            <QrCode className="w-4 h-4 text-slate-700" />
-            <span>Pix Instantâneo ou Cartão</span>
-          </div>
         </div>
 
       </div>

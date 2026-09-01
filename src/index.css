@@ -1,49 +1,60 @@
 @import "tailwindcss";
 
 @theme {
-  --font-heading: "Poppins", sans-serif;
-  --font-sans: "Inter", sans-serif;
-  --color-brand-blue: #2563eb;
-  --color-brand-dark: #0f172a;
-  --color-brand-light: #f8fafc;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --color-orange-brand: #F97316;
+  --color-orange-light: #FFF1E8;
+  --color-navy-brand: #172554;
+  --color-offwhite-brand: #FFF9F5;
+  --color-graphite-brand: #1F2937;
+  --color-gray-text: #475569;
+  --color-gray-border: #E5E7EB;
+  --color-green-check: #16A34A;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Evita "bounce" pesado e melhora a rolagem em iOS/Android */
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background-color: #f8fafc;
-  color: #334155;
+  font-family: var(--font-sans);
+  color: #1F2937;
+  background-color: #FFFFFF;
+  /* Rolagem mais fluida em mobile: evita reflow custoso durante o scroll */
+  overflow-x: hidden;
+  text-rendering: optimizeSpeed;
+}
+
+img {
+  /* Evita layout shift enquanto a imagem carrega */
+  height: auto;
+  max-width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6, .font-heading {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-heading);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+/* Seções fora da viewport não são renderizadas/pintadas até chegarem perto do scroll,
+   reduzindo drasticamente o custo de layout/paint em páginas longas no mobile. */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
 }
 
-@keyframes scrollRight {
-  0% {
-    transform: translate3d(-50%, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
+/* Otimizações de renderização para Mobile e Desktop 60fps/120fps */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform;
+  contain: layout style paint;
 }
 
-@keyframes scrollLeft {
+@keyframes marquee-scroll {
   0% {
     transform: translate3d(0, 0, 0);
   }
@@ -52,18 +63,45 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   }
 }
 
-.animate-marquee-right {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  animation: scrollRight 28s linear infinite;
+@keyframes marquee-scroll-third {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-33.333333%, 0, 0);
+  }
 }
 
-.animate-marquee-left {
+.animate-marquee-hero {
   display: flex;
   width: max-content;
+  animation: marquee-scroll 24s linear infinite;
   will-change: transform;
-  transform: translate3d(0, 0, 0);
-  animation: scrollLeft 28s linear infinite;
 }
+
+.animate-marquee-learn {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 24s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-testimonials {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-mini {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-third 18s linear infinite;
+  will-change: transform;
+}
+
+.pause-on-hover:hover {
+  animation-play-state: paused;
+}
+
+

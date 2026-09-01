@@ -1,6 +1,6 @@
 {
-  "name": "Matemática Visual ENEM",
-  "description": "Página de vendas moderna e de alta conversão para o material digital de Mapas Visuais de Matemática para o ENEM.",
+  "name": "Redação ENEM Completa",
+  "description": "Página de vendas oficial para o curso e material digital Redação ENEM Completa com 100 Mapas Visuais.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

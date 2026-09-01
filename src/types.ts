@@ -1,42 +1,45 @@
-export interface BonusItem {
+export interface ContentBlock {
   id: string;
   number: string;
   title: string;
-  lead?: string;
-  description: string;
-  originalPrice: string;
-  priceNote?: string;
+  topics: string[];
+}
+
+export interface BonusItem {
+  id: string;
   tag: string;
-  color: string;
-  bullets: string[];
-  imageUrl?: string;
-  sampleImages?: string[];
-  orientation?: 'landscape' | 'portrait';
+  title: string;
+  description: string;
+  category: 'redacao' | 'geral';
+  individualValue?: string;
+}
+
+export interface PlanItem {
+  id: 'basico' | 'completo';
+  name: string;
+  badge?: string;
+  subtitle: string;
+  features: string[];
+  oldPrice?: string;
+  totalPackageValue?: string;
+  discountBadge?: string;
+  price: string;
+  period: string;
+  ctaText: string;
+  isFeatured?: boolean;
+  checkoutUrl: string;
 }
 
 export interface Testimonial {
   id: string;
   name: string;
-  city: string;
-  targetCourse: string;
-  scoreOrGain: string;
+  avatarUrl: string;
   text: string;
-  avatarBg: string;
-  avatarInitial: string;
-  image?: string;
+  rating: number;
 }
 
-export interface VisualSheetSample {
-  id: string;
-  title: string;
-  category: string;
-  themeColor: string;
-  highlightConcept: string;
-  summary: string;
-  formulasPreview: string[];
-  imageUrl?: string;
-  visualElements: {
-    label: string;
-    description: string;
-  }[];
+export interface FaqItem {
+  question: string;
+  answer: string;
 }
+
