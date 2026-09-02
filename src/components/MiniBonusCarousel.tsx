@@ -32,7 +32,7 @@ export const MiniBonusCarousel: React.FC<MiniBonusCarouselProps> = ({
                 width={260}
                 height={390}
                 className="h-24 sm:h-28 w-auto object-contain block aspect-[3/4]"
-                loading="lazy"
+                loading="eager"
                 decoding="async"
               />
             </div>

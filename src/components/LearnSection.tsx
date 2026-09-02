@@ -97,7 +97,7 @@ export const LearnSection: React.FC = () => {
                   width={img.w}
                   height={img.h}
                   className="h-52 sm:h-64 md:h-72 w-auto object-contain block aspect-[3/4]"
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
                 />
               </div>

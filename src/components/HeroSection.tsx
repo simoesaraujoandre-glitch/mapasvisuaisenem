@@ -67,7 +67,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onCtaClick }) => {
                   width={img.w}
                   height={img.h}
                   className="h-52 sm:h-64 md:h-72 w-auto object-contain block aspect-[3/4]"
-                  loading={index < 2 ? "eager" : "lazy"}
+                  loading="eager"
                   fetchPriority={index < 2 ? "high" : "auto"}
                   decoding="async"
                 />
