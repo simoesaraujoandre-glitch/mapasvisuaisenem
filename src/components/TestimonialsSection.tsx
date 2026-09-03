@@ -1,9 +1,11 @@
 import React from 'react';
 import { Star } from 'lucide-react';
 import { TESTIMONIALS_DATA } from '../data/copyData';
+import { useInViewAnimation } from '../hooks/useInViewAnimation';
 
 export const TestimonialsSection: React.FC = () => {
   const items = TESTIMONIALS_DATA.items;
+  const { ref: marqueeRef, isInView } = useInViewAnimation<HTMLDivElement>();
 
   return (
     <section id="depoimentos" className="bg-white py-12 sm:py-20 border-b border-[#E2E8F0] overflow-hidden">
@@ -22,8 +24,11 @@ export const TestimonialsSection: React.FC = () => {
       </div>
 
       {/* CARROSSEL DE DEPOIMENTOS EM AUTO-SCROLL (GPU ACCELERATED & SMOOTH 60FPS) */}
-      <div className="w-full relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_5%,white_95%,transparent)]">
-        <div className="animate-marquee-testimonials pause-on-hover flex items-stretch gap-4 sm:gap-6 py-3 px-4 select-none gpu-accelerated">
+      <div ref={marqueeRef} className="w-full relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_5%,white_95%,transparent)]">
+        <div
+          className="animate-marquee-testimonials pause-on-hover flex items-stretch gap-4 sm:gap-6 py-3 px-4 select-none gpu-accelerated"
+          style={{ animationPlayState: isInView ? 'running' : 'paused' }}
+        >
           {[...items, ...items].map((dep, index) => (
             <div
               key={`${dep.id}-${index}`}

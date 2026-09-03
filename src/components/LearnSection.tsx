@@ -1,8 +1,10 @@
 import React from 'react';
 import { Compass, Target, Lightbulb, PenTool, Layers, BookOpen, FileText, CheckSquare } from 'lucide-react';
 import { LEARN_SECTION_DATA, CONTENT_BLOCKS } from '../data/copyData';
+import { useInViewAnimation } from '../hooks/useInViewAnimation';
 
 export const LearnSection: React.FC = () => {
+  const { ref: marqueeRef, isInView } = useInViewAnimation<HTMLDivElement>();
   const images = [
     { src: '/images/red10.webp', alt: 'Conteúdo Visual 10', w: 480, h: 339 },
     { src: '/images/red11.webp', alt: 'Conteúdo Visual 11', w: 480, h: 320 },
@@ -84,8 +86,11 @@ export const LearnSection: React.FC = () => {
         </div>
 
         {/* CARROSSEL DE IMAGENS DOS CONTEÚDOS (GPU ACCELERATED) */}
-        <div className="w-full overflow-hidden pointer-events-none my-4 sm:my-6 [mask-image:linear-gradient(to_right,transparent,white_8%,white_92%,transparent)]">
-          <div className="animate-marquee-learn gap-3 sm:gap-4 py-1 select-none gpu-accelerated">
+        <div ref={marqueeRef} className="w-full overflow-hidden pointer-events-none my-4 sm:my-6 [mask-image:linear-gradient(to_right,transparent,white_8%,white_92%,transparent)]">
+          <div
+            className="animate-marquee-learn gap-3 sm:gap-4 py-1 select-none gpu-accelerated"
+            style={{ animationPlayState: isInView ? 'running' : 'paused' }}
+          >
             {[...images, ...images].map((img, index) => (
               <div
                 key={index}

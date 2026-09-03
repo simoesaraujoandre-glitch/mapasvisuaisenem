@@ -1,4 +1,5 @@
 import React from 'react';
+import { useInViewAnimation } from '../hooks/useInViewAnimation';
 
 interface MiniBonusCarouselProps {
   images: { src: string; alt: string }[];
@@ -9,6 +10,8 @@ export const MiniBonusCarousel: React.FC<MiniBonusCarouselProps> = ({
   images,
   title = "Prévia dos Mapas Inclusos",
 }) => {
+  const { ref, isInView } = useInViewAnimation<HTMLDivElement>();
+
   if (!images || images.length === 0) return null;
 
   return (
@@ -19,9 +22,12 @@ export const MiniBonusCarousel: React.FC<MiniBonusCarouselProps> = ({
         </span>
       </div>
 
-      <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_5%,white_95%,transparent)]">
-        <div className="animate-marquee-mini gap-2.5 py-1 select-none gpu-accelerated">
-          {[...images, ...images, ...images].map((img, idx) => (
+      <div ref={ref} className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_5%,white_95%,transparent)]">
+        <div
+          className="animate-marquee-mini gap-2.5 py-1 select-none gpu-accelerated"
+          style={{ animationPlayState: isInView ? 'running' : 'paused' }}
+        >
+          {[...images, ...images].map((img, idx) => (
             <div
               key={idx}
               className="shrink-0 rounded-lg overflow-hidden border border-[#E2E8F0] bg-white shadow-2xs"
