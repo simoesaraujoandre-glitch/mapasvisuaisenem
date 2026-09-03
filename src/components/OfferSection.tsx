@@ -124,7 +124,7 @@ export const OfferSection: React.FC<OfferSectionProps> = ({ onSelectPlan }) => {
           </div>
 
           {/* ==============================
-              PLANO COMPLETO (R$29,90) - DESTACADO
+              PLANO COMPLETO (R$27,90) - DESTACADO
              ============================== */}
           <div 
             id="plano-completo"
