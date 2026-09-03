@@ -178,6 +178,14 @@ export const BONUS_ITEMS: BonusItem[] = [
   },
 ];
 
+export const UPSELL_OFFER_DATA = {
+  checkoutUrl: "https://pay.wiapy.com/fBSJnMh_WDOw",
+  oldPrice: "R$29,90",
+  price: "R$14,90",
+  discountBadge: "50% OFF",
+  // Mesmo conteúdo do Plano Completo — features herdadas do próprio plano.
+};
+
 export const OFFER_SECTION_DATA = {
   headline: "Escolha como você quer se preparar para o ENEM.",
   plans: [
