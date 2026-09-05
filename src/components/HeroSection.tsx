@@ -24,7 +24,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onCtaClick }) => {
         
         {/* HEADLINE */}
         <h1 className="font-heading text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#172554] leading-[1.22] tracking-tight mb-5 sm:mb-6 max-w-3xl">
-          Domine toda a Redação do ENEM com <span className="text-[#F97316]">100 Mapas Visuais</span> simples, práticos e diretos ao ponto.
+          <span className="text-[#F97316]">100 Mapas Visuais</span> que te mostram exatamente o que escrever em cada parte da Redação, para você buscar 900+ no ENEM.
         </h1>
 
         {/* MOCKUP DO PRODUTO */}

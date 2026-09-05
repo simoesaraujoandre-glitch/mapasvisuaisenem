@@ -22,6 +22,7 @@ export interface PlanItem {
   features: string[];
   oldPrice?: string;
   totalPackageValue?: string;
+  anchorNote?: string;
   discountBadge?: string;
   price: string;
   period: string;

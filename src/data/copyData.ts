@@ -1,8 +1,8 @@
 import { ContentBlock, BonusItem, PlanItem, Testimonial, FaqItem } from '../types';
 
 export const HERO_DATA = {
-  headline: "Domine toda a Redação do ENEM com 100 Mapas Visuais simples, práticos e diretos ao ponto.",
-  subheadline: "Aprenda exatamente o que uma Redação de alto nível precisa ter e se prepare para buscar 900+ no ENEM.",
+  headline: "100 Mapas Visuais que te mostram exatamente o que escrever em cada parte da Redação, para você buscar 900+ no ENEM.",
+  subheadline: "Chega de apostila longa e vídeo de 40 minutos. São 100 mapas, um por conceito, prontos pra consultar antes de escrever.",
   cta: "QUERO DOMINAR A REDAÇÃO DO ENEM",
   support: "A partir de R$10 • Acesso imediato • Garantia de 7 dias",
 };
@@ -193,7 +193,7 @@ export const OFFER_SECTION_DATA = {
       id: "basico",
       name: "PLANO BÁSICO",
       badge: "REDAÇÃO ENEM VISUAL",
-      subtitle: "Para quem quer focar exclusivamente em Redação.",
+      subtitle: "Ideal se você quer resolver só a Redação, direto ao ponto, sem distração.",
       features: [
         "100 Mapas Visuais de Redação",
         "Do básico à redação completa",
@@ -217,7 +217,7 @@ export const OFFER_SECTION_DATA = {
       id: "completo",
       name: "PLANO COMPLETO",
       badge: "MELHOR CUSTO-BENEFÍCIO",
-      subtitle: "Leve o material completo de Redação + todos os 5 bônus e tenha uma preparação muito mais completa para o ENEM.",
+      subtitle: "Ideal se você quer virar a chave no ENEM inteiro, com Redação, Matemática e Linguagens no mesmo lugar.",
       features: [
         "100 Mapas Visuais de Redação",
         "100 Repertórios Socioculturais",
@@ -230,6 +230,7 @@ export const OFFER_SECTION_DATA = {
         "Garantia de 7 dias",
       ],
       totalPackageValue: "R$224,90",
+      anchorNote: "Isso dá menos de R$0,20 por conteúdo, e ainda inclui tudo do Plano Básico.",
       discountBadge: "88% OFF",
       price: "R$27,90",
       period: "Pagamento único.",
@@ -283,11 +284,11 @@ export const TESTIMONIALS_DATA = {
 };
 
 export const GUARANTEE_DATA = {
-  badge: "COMPRA SEM RISCO",
-  headline: "Você ainda tem 7 dias para conhecer o material.",
-  subheadline: "Acesse os Mapas Visuais, veja como o material funciona e decida com calma se essa forma de estudar faz sentido para você.",
-  text: "Se dentro desse período você decidir que o material não atende às suas expectativas, poderá solicitar o reembolso conforme as condições da compra.",
-  highlight: "7 DIAS DE GARANTIA",
+  badge: "COMPRA 100% SEM RISCO",
+  headline: "Você tem 7 dias pra testar o material com calma.",
+  subheadline: "Acesse os 100 Mapas Visuais, veja como funciona, aplique numa redação de treino.",
+  text: "Se por qualquer motivo você sentir que não é pra você, é só pedir o reembolso. Devolução total, sem perguntas, sem burocracia. O risco é todo nosso, o único jeito de você perder aqui é não tentar.",
+  highlight: "7 DIAS DE GARANTIA INCONDICIONAL",
 };
 
 export const FAQ_DATA: FaqItem[] = [

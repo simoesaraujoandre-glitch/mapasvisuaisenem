@@ -22,7 +22,7 @@ export const GuaranteeSection: React.FC = () => {
 
           {/* Headline */}
           <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#172554] tracking-tight leading-tight mb-3 sm:mb-4">
-            Você ainda tem <span className="text-[#F97316]">7 dias</span> para conhecer o material.
+            Você tem <span className="text-[#F97316]">7 dias</span> pra testar o material com calma.
           </h2>
 
           {/* Subheadline */}

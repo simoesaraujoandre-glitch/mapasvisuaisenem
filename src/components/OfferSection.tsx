@@ -195,6 +195,11 @@ export const OfferSection: React.FC<OfferSectionProps> = ({ onSelectPlan }) => {
                 <span className="text-xs text-gray-600 font-medium block mt-0.5">
                   {completePlan.period}
                 </span>
+                {completePlan.anchorNote && (
+                  <span className="text-xs text-[#9A3412] font-semibold block mt-2 max-w-xs">
+                    {completePlan.anchorNote}
+                  </span>
+                )}
               </div>
 
               <a
