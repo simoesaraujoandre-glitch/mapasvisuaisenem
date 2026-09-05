@@ -1,19 +1,8 @@
 import React from 'react';
 import { Compass, Target, Lightbulb, PenTool, Layers, BookOpen, FileText, CheckSquare } from 'lucide-react';
 import { LEARN_SECTION_DATA, CONTENT_BLOCKS } from '../data/copyData';
-import { useInViewAnimation } from '../hooks/useInViewAnimation';
 
 export const LearnSection: React.FC = () => {
-  const { ref: marqueeRef, isInView } = useInViewAnimation<HTMLDivElement>();
-  const images = [
-    { src: '/images/red10.webp', alt: 'Conteúdo Visual 10', w: 480, h: 339 },
-    { src: '/images/red11.webp', alt: 'Conteúdo Visual 11', w: 480, h: 320 },
-    { src: '/images/red12.webp', alt: 'Conteúdo Visual 12', w: 480, h: 339 },
-    { src: '/images/red13.webp', alt: 'Conteúdo Visual 13', w: 480, h: 339 },
-    { src: '/images/red15.webp', alt: 'Conteúdo Visual 15', w: 480, h: 339 },
-    { src: '/images/red16.webp', alt: 'Conteúdo Visual 16', w: 480, h: 339 },
-  ];
-
   const blockIcons: Record<string, React.ReactNode> = {
     "bloco-1": <Compass className="w-5 h-5 text-[#F97316]" />,
     "bloco-2": <Target className="w-5 h-5 text-[#F97316]" />,
@@ -83,31 +72,6 @@ export const LearnSection: React.FC = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* CARROSSEL DE IMAGENS DOS CONTEÚDOS (GPU ACCELERATED) */}
-        <div ref={marqueeRef} className="w-full overflow-hidden pointer-events-none my-4 sm:my-6 [mask-image:linear-gradient(to_right,transparent,white_8%,white_92%,transparent)]">
-          <div
-            className="animate-marquee-learn gap-3 sm:gap-4 py-1 select-none gpu-accelerated"
-            style={{ animationPlayState: isInView ? 'running' : 'paused' }}
-          >
-            {[...images, ...images].map((img, index) => (
-              <div
-                key={index}
-                className="shrink-0 rounded-xl overflow-hidden border border-[#E2E8F0] shadow-2xs bg-white"
-              >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  width={img.w}
-                  height={img.h}
-                  className="h-52 sm:h-64 md:h-72 w-auto object-contain block aspect-[3/4]"
-                  loading="eager"
-                  decoding="async"
-                />
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* FECHAMENTO DA SEÇÃO */}

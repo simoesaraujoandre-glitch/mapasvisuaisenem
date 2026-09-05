@@ -37,6 +37,9 @@ export interface Testimonial {
   avatarUrl: string;
   text: string;
   rating: number;
+  likes?: number;
+  badge?: string;
+  timeAgo?: string;
 }
 
 export interface FaqItem {

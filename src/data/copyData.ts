@@ -251,6 +251,9 @@ export const TESTIMONIALS_DATA = {
       avatarUrl: "/images/avatar-1.webp",
       text: "Antes eu entendia a teoria, mas na hora de escrever não sabia como organizar tudo. Os Mapas Visuais deixaram a estrutura da redação muito mais clara para mim.",
       rating: 5,
+      likes: 254,
+      badge: "Vestibulanda de Medicina",
+      timeAgo: "há 3 horas",
     },
     {
       id: "dep-3",
@@ -258,6 +261,9 @@ export const TESTIMONIALS_DATA = {
       avatarUrl: "/images/avatar-3.webp",
       text: "Eu sempre tinha repertório na cabeça, mas não sabia como encaixar no texto. A forma como o material explica a conexão entre repertório e argumento fez muita diferença.",
       rating: 5,
+      likes: 187,
+      badge: "Estudante 3° Ano Ensino Médio",
+      timeAgo: "há 6 horas",
     },
     {
       id: "dep-4",
@@ -265,6 +271,9 @@ export const TESTIMONIALS_DATA = {
       avatarUrl: "/images/avatar-4.webp",
       text: "As 5 competências do ENEM sempre pareciam confusas. Depois de ver tudo organizado visualmente, comecei a entender melhor o que realmente precisa aparecer na redação.",
       rating: 5,
+      likes: 312,
+      badge: "Futura Caloura de Direito",
+      timeAgo: "há 1 dia",
     },
     {
       id: "dep-5",
@@ -272,6 +281,9 @@ export const TESTIMONIALS_DATA = {
       avatarUrl: "/images/avatar-6.webp",
       text: "Eu tinha muita dificuldade na conclusão e acabava fazendo propostas muito genéricas. A parte de intervenção deixou bem mais claro agente, ação, meio, finalidade e detalhamento.",
       rating: 5,
+      likes: 96,
+      badge: "Vestibulanda de Psicologia",
+      timeAgo: "há 14 horas",
     },
     {
       id: "dep-6",
@@ -279,6 +291,9 @@ export const TESTIMONIALS_DATA = {
       avatarUrl: "/images/avatar-5.webp",
       text: "O que mais gostei foi a praticidade. Em vez de ficar procurando conteúdo em várias anotações, consigo revisar exatamente o assunto que preciso em poucos minutos.",
       rating: 5,
+      likes: 68,
+      badge: "Estudante Cursinho",
+      timeAgo: "há 2 dias",
     },
   ] as Testimonial[],
 };
